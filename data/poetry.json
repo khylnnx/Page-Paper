@@ -1,0 +1,77 @@
+[
+  {
+    "id": 1,
+    "title": "Milk and Honey",
+    "author": "Rupi Kaur",
+    "price": 550,
+    "stock": 80,
+    "category": "Poetry",
+    "tags": [
+      "Love",
+      "Healing",
+      "Modern Poetry"
+    ],
+    "image": "Milk and Honey.jpg",
+    "description": "A collection of poetry and prose about survival, love, loss, and healing. Through raw and honest words, Rupi Kaur explores the journey of hurting, loving, breaking, and finding strength within oneself."
+  },
+  {
+    "id": 2,
+    "title": "The Sun and Her Flowers",
+    "author": "Rupi Kaur",
+    "price": 580,
+    "stock": 65,
+    "category": "Poetry",
+    "tags": [
+      "Growth",
+      "Feminism",
+      "Self-Love"
+    ],
+    "image": "The Sun and Her Flowers.jpg",
+    "description": "This poetry collection is a journey of wilting, falling, rooting, rising, and blooming. It celebrates love in all its forms and honors the healing power of embracing one\u00e2\u20ac\u2122s roots and identity."
+  },
+  {
+    "id": 3,
+    "title": "Ariel",
+    "author": "Sylvia Plath",
+    "price": 600,
+    "stock": 40,
+    "category": "Poetry",
+    "tags": [
+      "Classic",
+      "Confessional",
+      "Emotional"
+    ],
+    "image": "Ariel.jpg",
+    "description": "A powerful and intense collection of poems that explore themes of identity, death, rebirth, and mental struggle. Sylvia Plath\u00e2\u20ac\u2122s vivid language and emotional depth make this a landmark work in modern poetry."
+  },
+  {
+    "id": 4,
+    "title": "The Odyssey",
+    "author": "Homer",
+    "price": 650,
+    "stock": 35,
+    "category": "Poetry",
+    "tags": [
+      "Epic Poetry",
+      "Mythology",
+      "Classic"
+    ],
+    "image": "The Odyssey by Homer.jpg",
+    "description": "An epic poem that follows Odysseus\u00e2\u20ac\u2122s long and perilous journey home after the Trojan War. Filled with gods, monsters, and heroic trials, it is one of the greatest and most influential works of literature."
+  },
+  {
+    "id": 5,
+    "title": "Love & Misadventure",
+    "author": "Lang Leav",
+    "price": 560,
+    "stock": 73,
+    "category": "Poetry",
+    "tags": [
+      "Romance",
+      "Heartbreak",
+      "Modern Poetry"
+    ],
+    "image": "Love & Misadventure.jpg",
+    "description": "A touching collection of poems about love found, love lost, and the emotions in between. Lang Leav\u00e2\u20ac\u2122s simple yet heartfelt verses capture the beauty and pain of romantic experiences."
+  }
+]

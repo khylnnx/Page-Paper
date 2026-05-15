@@ -1,0 +1,77 @@
+[
+  {
+    "id": 1,
+    "title": "The Silent Patient",
+    "author": "Alex Michaelides",
+    "price": 700,
+    "stock": 50,
+    "category": "Mystery",
+    "tags": [
+      "Psychological Thriller",
+      "Suspense",
+      "Twist Ending"
+    ],
+    "image": "The Silent Patient.jpg",
+    "description": "Alicia Berenson appears to have a perfect life until she shoots her husband and then never speaks another word. Theo Faber, a criminal psychotherapist, becomes obsessed with uncovering the truth behind her silence\u00e2\u20ac\u201dno matter the cost."
+  },
+  {
+    "id": 2,
+    "title": "Gone Girl",
+    "author": "Gillian Flynn",
+    "price": 720,
+    "stock": 40,
+    "category": "Mystery",
+    "tags": [
+      "Psychological Thriller",
+      "Crime",
+      "Marriage"
+    ],
+    "image": "Gone Girl.jpg",
+    "description": "On their fifth wedding anniversary, Amy Dunne disappears, and her husband Nick becomes the prime suspect. As secrets unravel, the truth behind their marriage proves far darker than anyone imagined."
+  },
+  {
+    "id": 3,
+    "title": "The Girl on the Train",
+    "author": "Paula Hawkins",
+    "price": 680,
+    "stock": 45,
+    "category": "Mystery",
+    "tags": [
+      "Suspense",
+      "Unreliable Narrator",
+      "Crime"
+    ],
+    "image": "The Girl on the Train.jpg",
+    "description": "Rachel watches a seemingly perfect couple from her daily train ride\u00e2\u20ac\u201duntil she witnesses something shocking. Soon, she is drawn into a missing person investigation that blurs the line between truth and illusion."
+  },
+  {
+    "id": 4,
+    "title": "Big Little Lies",
+    "author": "Liane Moriarty",
+    "price": 690,
+    "stock": 33,
+    "category": "Mystery",
+    "tags": [
+      "Domestic Thriller",
+      "Secrets",
+      "Drama"
+    ],
+    "image": "Big Little Lies.jpg",
+    "description": "Three women with seemingly perfect lives are brought together by a shocking death at a school trivia night. As secrets and lies surface, the truth behind the crime slowly comes into focus."
+  },
+  {
+    "id": 5,
+    "title": "The Da Vinci Code",
+    "author": "Dan Brown",
+    "price": 730,
+    "stock": 60,
+    "category": "Mystery",
+    "tags": [
+      "Conspiracy",
+      "Historical Mystery",
+      "Fast-Paced"
+    ],
+    "image": "The Da Vinci Code.jpg",
+    "description": "A murder inside the Louvre Museum sets off a race against time. Symbologist Robert Langdon uncovers a series of cryptic clues that lead to a secret capable of shaking the foundations of history."
+  }
+]

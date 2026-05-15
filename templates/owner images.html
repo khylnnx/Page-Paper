@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizontal Scroll Owner Book Memories</title>
+
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow-x: hidden;
+            background-color: #EAE2C6;
+        }
+
+        section {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            overflow-x: auto;
+            overflow-y: hidden;
+            gap: 8px;
+            padding: 10px 20px;
+            scrollbar-width: thin;
+            scrollbar-color: #bbb #f9f9f9;
+            scroll-behavior: smooth;
+            box-sizing: border-box;
+        }
+
+        /* Scrollable section for images only */
+        section {
+            display: flex;
+            overflow-x: auto;
+            overflow-y: hidden;
+            gap: 8px;
+            padding: 10px;
+            scrollbar-width: thin;
+            scrollbar-color: #bbb #f9f9f9;
+            scroll-behavior: smooth;
+            box-sizing: border-box;
+        }
+
+        section::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        section::-webkit-scrollbar-thumb {
+            background: #bbb;
+            border-radius: 10px;
+        }
+
+        img {
+            width: 260px;
+            height: 320px;
+            object-fit: cover;
+            border-radius: 10px;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        img:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <section>
+        <img src="C:\Users\KHYLE\OneDrive\COLLEGE\2nd Year\WebApp (prog 3 finals)\Page & Paper\static\owners_images\image1.jpg">
+        <img src="C:\Users\KHYLE\OneDrive\COLLEGE\2nd Year\WebApp (prog 3 finals)\Page & Paper\static\owners_images\image2.jpg">
+        <img src="C:\Users\KHYLE\OneDrive\COLLEGE\2nd Year\WebApp (prog 3 finals)\Page & Paper\static\owners_images\image3.jpg">
+        <img src="C:\Users\KHYLE\OneDrive\COLLEGE\2nd Year\WebApp (prog 3 finals)\Page & Paper\static\owners_images\image4.jpg">
+        <img src="C:\Users\KHYLE\OneDrive\COLLEGE\2nd Year\WebApp (prog 3 finals)\Page & Paper\static\owners_images\image6.jpg">
+        <img src="C:\Users\KHYLE\OneDrive\COLLEGE\2nd Year\WebApp (prog 3 finals)\Page & Paper\static\owners_images\image5.jpg">
+        <img src="C:\Users\KHYLE\OneDrive\COLLEGE\2nd Year\WebApp (prog 3 finals)\Page & Paper\static\owners_images\me.jpg">
+        <img src="C:\Users\KHYLE\OneDrive\COLLEGE\2nd Year\WebApp (prog 3 finals)\Page & Paper\static\owners_images\image7.jpg">
+        <img src="C:\Users\KHYLE\OneDrive\COLLEGE\2nd Year\WebApp (prog 3 finals)\Page & Paper\static\owners_images\image8.jpg">
+        <img src="C:\Users\KHYLE\OneDrive\COLLEGE\2nd Year\WebApp (prog 3 finals)\Page & Paper\static\owners_images\image9.jpg">
+    </section>
+        <script src="/static/js/theme.js"></script>
+    </body>
+
+</html>

@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Page & Paper</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --background: hsl(42, 33%, 91%);
+            --foreground: hsl(354, 60%, 15%);
+            --card: hsl(42, 40%, 95%);
+            --card-foreground: hsl(354, 60%, 15%);
+            --primary: hsl(354, 60%, 15%);
+            --primary-foreground: hsl(42, 67%, 78%);
+            --secondary: hsl(0, 29%, 46%);
+            --secondary-foreground: hsl(0, 0%, 100%);
+            --muted: hsl(32, 45%, 85%);
+            --muted-foreground: hsl(25, 28%, 35%);
+            --accent: hsl(0, 50%, 55%);
+            --accent-foreground: hsl(0, 0%, 100%);
+            --border: hsl(0, 35%, 62%);
+            --rose: hsl(0, 35%, 62%);
+            --rose-light: hsl(0, 35%, 80%);
+            --rose-dark: hsl(0, 29%, 46%);
+            --golden: hsl(32, 67%, 74%);
+            --golden-accent: hsl(25, 52%, 50%);
+            --radius: 0.75rem;
+            --shadow-soft: 0 4px 20px hsla(354, 60%, 15%, 0.15);
+            --shadow-medium: 0 8px 30px hsla(354, 60%, 15%, 0.22);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lora', Georgia, serif;
+            background: linear-gradient(135deg, var(--background) 0%, var(--card) 100%);
+            color: var(--foreground);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: var(--primary);
+            padding: 1.5rem 2rem;
+        }
+
+        .header-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: hsla(38, 70%, 55%, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 26px;
+            height: 26px;
+            color: var(--gold);
+        }
+
+        .header-title {
+            color: var(--secondary-foreground);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .header-subtitle {
+            color: hsla(40, 35%, 97%, 0.7);
+            font-size: 0.875rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-title {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: var(--foreground);
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--muted-foreground);
+            font-family: 'Inter', sans-serif;
+            margin-bottom: 2rem;
+        }
+
+        /* Stats Grid */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-card);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .stat-card:hover {
+            box-shadow: var(--shadow-elevated);
+            transform: translateY(-2px);
+        }
+
+        .stat-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            background: hsla(350, 65%, 18%, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        .stat-card:hover .stat-icon {
+            background: hsla(350, 65%, 18%, 0.15);
+        }
+
+        .stat-icon svg {
+            width: 24px;
+            height: 24px;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            font-family: 'Inter', sans-serif;
+            color: var(--muted-foreground);
+            margin-top: 0.25rem;
+        }
+
+        /* Section Cards */
+        .section {
+            background: var(--card);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.25rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-title-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-icon {
+            width: 36px;
+            height: 36px;
+            background: hsla(350, 65%, 18%, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .section-icon svg {
+            width: 18px;
+            height: 18px;
+            color: var(--primary);
+        }
+
+        .section h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--foreground);
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: var(--secondary);
+            color: var(--secondary-foreground);
+            padding: 1rem 1.25rem;
+            text-align: left;
+            font-size: 0.75rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        td {
+            padding: 1rem 1.25rem;
+            font-size: 0.875rem;
+            font-family: 'Inter', sans-serif;
+            color: var(--foreground);
+            border-bottom: 1px solid var(--border);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr {
+            transition: background 0.2s ease;
+        }
+
+        tbody tr:hover {
+            background: hsla(35, 30%, 88%, 0.5);
+        }
+
+        .price {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            background: hsla(35, 60%, 75%, 0.3);
+            color: var(--foreground);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.15s; }
+        .delay-3 { animation-delay: 0.2s; }
+        .delay-4 { animation-delay: 0.25s; }
+        .delay-5 { animation-delay: 0.3s; }
+        .delay-6 { animation-delay: 0.4s; }
+        .delay-7 { animation-delay: 0.5s; }
+        .delay-8 { animation-delay: 0.6s; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .stat-card {
+                padding: 1.25rem;
+            }
+
+            .section {
+                overflow-x: auto;
+            }
+
+            table {
+                min-width: 600px;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 480px) {
+            .stats {
+                gap: 0.75rem;
+            }
+
+            .stat-card {
+                padding: 1rem;
+            }
+
+            .stat-value {
+                font-size: 1.5rem;
+            }
+
+            .stat-label {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div>
+                <h1 class="header-title">Page & Paper</h1>
+                <p class="header-subtitle">Admin Dashboard</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1 class="page-title animate-in">Dashboard Overview</h1>
+        <p class="page-subtitle animate-in delay-1">Welcome back! Here's what's happening with your bookstore.</p>
+
+        <!-- Stats Grid -->
+        <div class="stats">
+            <div class="stat-card animate-in delay-1">
+                <div class="stat-header">
+                    <div class="stat-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="stat-value">{{ users|length }}</div>
+                <div class="stat-label">Total Users</div>
+            </div>
+
+            <div class="stat-card animate-in delay-2">
+                <div class="stat-header">
+                    <div class="stat-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="stat-value">{{ orders|length }}</div>
+                <div class="stat-label">Total Orders</div>
+            </div>
+
+            <div class="stat-card animate-in delay-3">
+                <div class="stat-header">
+                    <div class="stat-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="stat-value">{{ subscribers|length }}</div>
+                <div class="stat-label">Subscribers</div>
+            </div>
+
+            <div class="stat-card animate-in delay-4">
+                <div class="stat-header">
+                    <div class="stat-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="stat-value">{{ questions|length }}</div>
+                <div class="stat-label">Questions</div>
+            </div>
+
+            <div class="stat-card animate-in delay-5">
+                <div class="stat-header">
+                    <div class="stat-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="stat-value">{{ messages|length }}</div>
+                <div class="stat-label">Messages</div>
+            </div>
+        </div>
+
+        <!-- Users Table -->
+        <div class="section animate-in delay-5">
+            <div class="section-header">
+                <div class="section-title-wrapper">
+                    <div class="section-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </div>
+                    <h2>Users</h2>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Phone</th>
+                        <th>Created At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.address or 'N/A' }}</td>
+                        <td>{{ user.phone or 'N/A' }}</td>
+                        <td>{{ user.created_at }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Orders Table -->
+        <div class="section animate-in delay-6">
+            <div class="section-header">
+                <div class="section-title-wrapper">
+                    <div class="section-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                    </div>
+                    <h2>Recent Orders</h2>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Book Title</th>
+                        <th>Author</th>
+                        <th>Price (per piece)</th>
+                        <th>Qty</th>
+                        <th>Payment</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td>{{ order.order_id }}</td>
+                        <td>{{ order.user_email }}</td>
+                        <td>{{ order.title }}</td>
+                        <td>{{ order.author }}</td>
+                        <td><span class="price">₱{{ order.price }}</span></td>
+                        <td>{{ order.quantity }}</td>
+                        <td><span class="badge">{{ order.payment }}</span></td>
+                        <td>{{ order.timestamp }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Subscribers Table -->
+        <div class="section animate-in delay-7">
+            <div class="section-header">
+                <div class="section-title-wrapper">
+                    <div class="section-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <h2>Newsletter Subscribers</h2>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>User ID</th>
+                        <th>Email</th>
+                        <th>Subscribed At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for sub in subscribers %}
+                    <tr>
+                        <td>{{ sub.id }}</td>
+                        <td>{{ sub.user_id or 'Guest' }}</td>
+                        <td>{{ sub.email }}</td>
+                        <td>{{ sub.subscribed_at }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Questions Table -->
+        <div class="section animate-in delay-8">
+            <div class="section-header">
+                <div class="section-title-wrapper">
+                    <div class="section-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h2>Customer Questions</h2>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>User Name</th>
+                        <th>User Email</th>
+                        <th>Question</th>
+                        <th>Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for q in questions %}
+                    <tr>
+                        <td>{{ q.id }}</td>
+                        <td>{{ q.user_name }}</td>
+                        <td>{{ q.user_email }}</td>
+                        <td>{{ q.question }}</td>
+                        <td>{{ q.timestamp }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Messages Table -->
+        <div class="section animate-in delay-9">
+            <div class="section-header">
+                <div class="section-title-wrapper">
+                    <div class="section-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                        </svg>
+                    </div>
+                    <h2>Owner Messages</h2>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Message</th>
+                        <th>Sender Name</th>
+                        <th>Sender Email</th>
+                        <th>Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for msg in messages %}
+                    <tr>
+                        <td>{{ msg.id }}</td>
+                        <td>{{ msg.message }}</td>
+                        <td>{{ msg.sender_name or 'Anonymous' }}</td>
+                        <td>{{ msg.sender_email or 'N/A' }}</td>
+                        <td>{{ msg.timestamp }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

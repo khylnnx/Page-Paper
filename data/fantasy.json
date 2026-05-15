@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "title": "A Court of Thorns and Roses",
+    "author": "Sarah J. Maas",
+    "price": 700,
+    "stock": 60,
+    "category": "Fantasy",
+    "tags": ["Faeries", "Romance", "Adventure"],
+    "image": "A Court of Thorns and Roses.jpg",
+    "description": "When nineteen-year-old Feyre kills a wolf in the woods, a terrifying creature arrives to demand retribution. Dragged to a magical land she knows only from legends, Feyre discovers a world of faeries, danger, and a love that could change her fate forever."
+  },
+  {
+    "id": 2,
+    "title": "The Hobbit",
+    "author": "J.R.R. Tolkien",
+    "price": 650,
+    "stock": 40,
+    "category": "Fantasy",
+    "tags": ["Classic", "Adventure", "Epic Fantasy"],
+    "image": "The Hobbit.jpg",
+    "description": "Bilbo Baggins lives a quiet, comfortable life until the wizard Gandalf and a group of dwarves draw him into an epic quest. From trolls to dragons, Bilbo’s journey takes him far beyond the comforts of home and into legend."
+  },
+  {
+    "id": 3,
+    "title": "Shadow and Bone",
+    "author": "Leigh Bardugo",
+    "price": 680,
+    "stock": 55,
+    "category": "Fantasy",
+    "tags": ["Young Adult", "Magic", "Chosen One"],
+    "image": "Shadow and Bone.jpg",
+    "description": "Orphaned soldier Alina Starkov discovers a dormant power that could be the key to saving her war-torn world. Thrust into a glittering court of magic and danger, she must learn who to trust before darkness consumes everything."
+  },
+  {
+    "id": 4,
+    "title": "The Name of the Wind",
+    "author": "Patrick Rothfuss",
+    "price": 750,
+    "stock": 30,
+    "category": "Fantasy",
+    "tags": ["Epic Fantasy", "Magic", "Coming of Age"],
+    "image": "The Name of the Wind.jpg",
+    "description": "Kvothe recounts his life story—from a gifted child in a troupe of traveling players to a notorious wizard. Filled with music, magic, and mystery, this is the tale of how legends are born."
+  },
+  {
+    "id": 5,
+    "title": "Percy Jackson & the Olympians: The Lightning Thief",
+    "author": "Rick Riordan",
+    "price": 620,
+    "stock": 70,
+    "category": "Fantasy",
+    "tags": ["Mythology", "Young Adult", "Adventure"],
+    "image": "The Lightning Thief.jpg",
+    "description": "Twelve-year-old Percy Jackson discovers he is the son of a Greek god. Accused of stealing Zeus’s lightning bolt, Percy must race against time to stop a war among the gods and uncover the truth about his identity."
+  }
+]

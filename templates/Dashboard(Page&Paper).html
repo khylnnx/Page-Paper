@@ -1,0 +1,2528 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reader Dashboard | Page & Paper</title>
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --background: hsl(42, 33%, 91%);
+            --foreground: hsl(354, 60%, 15%);
+            --card: hsl(42, 40%, 95%);
+            --card-foreground: hsl(354, 60%, 15%);
+            --primary: hsl(354, 60%, 15%);
+            --primary-foreground: hsl(42, 67%, 78%);
+            --secondary: hsl(0, 29%, 46%);
+            --secondary-foreground: hsl(0, 0%, 100%);
+            --muted: hsl(32, 45%, 85%);
+            --muted-foreground: hsl(25, 28%, 35%);
+            --accent: hsl(0, 50%, 55%);
+            --accent-foreground: hsl(0, 0%, 100%);
+            --border: hsl(0, 35%, 62%);
+            --rose: hsl(0, 35%, 62%);
+            --rose-light: hsl(0, 35%, 80%);
+            --rose-dark: hsl(0, 29%, 46%);
+            --golden: hsl(32, 67%, 74%);
+            --golden-accent: hsl(25, 52%, 50%);
+            --radius: 0.75rem;
+            --shadow-soft: 0 4px 20px hsla(354, 60%, 15%, 0.15);
+            --shadow-medium: 0 8px 30px hsla(354, 60%, 15%, 0.22);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        body {
+            font-family: 'Lora', Georgia, serif;
+            background-color: var(--background);
+            color: var(--foreground);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                padding: 0 2rem;
+            }
+        }
+
+        /* Navigation */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: hsla(42, 33%, 88%, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--foreground);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: none;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .nav-link {
+            position: relative;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: hsla(350, 65%, 15%, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--foreground);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 75%;
+        }
+
+        .nav-menu-btn {
+            display: flex;
+            padding: 0.5rem;
+            background: transparent;
+            border: none;
+            color: var(--foreground);
+            cursor: pointer;
+        }
+
+        .nav-menu-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .nav-mobile {
+            display: none;
+            padding: 1rem 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .nav-mobile.active {
+            display: block;
+        }
+
+        .nav-mobile-link {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: rgba(61, 12, 17, 0.8);
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .nav-mobile-link:hover {
+            color: var(--foreground);
+            background: rgba(61, 12, 17, 0.05);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 10rem;
+            object-fit: cover;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (min-width: 640px) {
+            .hero-img {
+                height: 10rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+
+            .nav-menu-btn {
+                display: none;
+            }
+
+            .hero-img {
+                height: 12rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .hero-img {
+                height: 15rem;
+            }
+        }
+
+        /* ==================== SECTIONS ==================== */
+        section {
+            background: var(--panel-bg);
+            max-width: 1200px;
+            margin: 1rem auto;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            animation: fadeIn 0.4s ease;
+        }
+
+        @media (min-width: 768px) {
+            section {
+                margin: 2rem auto;
+                padding: 2rem;
+            }
+        }
+
+        section h2 {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            section h2 {
+                font-size: 1.875rem;
+            }
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--muted-foreground);
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
+        }
+
+        @media (min-width: 768px) {
+            .subtitle {
+                font-size: 1rem;
+            }
+        }
+
+        /* ==================== BUTTONS ==================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.625rem 1.25rem;
+            border-radius: 0.625rem;
+            border: none;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--primary-foreground);
+        }
+
+        .btn-primary:hover {
+            background: hsl(350, 55%, 20%);
+        }
+
+        .btn-accent {
+            background: var(--accent);
+            color: var(--accent-foreground);
+        }
+
+        .btn-accent:hover {
+            background: hsl(0, 45%, 50%);
+        }
+
+        .btn-outline {
+            background: var(--card);
+            color: var(--foreground);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            background: var(--accent);
+            color: var(--accent-foreground);
+            border-color: var(--accent);
+        }
+
+        .btn-full {
+            width: 100%;
+        }
+
+        .btn-center {
+            display: flex;
+            margin: 0 auto;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        #auth-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .auth-form-wrapper {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .auth-form-wrapper {
+                padding: 2rem;
+            }
+        }
+
+        .auth-card {
+            width: 100%;
+            max-width: 28rem;
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .auth-card {
+                padding: 2rem;
+            }
+        }
+
+        .auth-card .icon-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .auth-card .icon-header i {
+            font-size: 3rem;
+            color: var(--accent);
+        }
+
+        .auth-card h2 {
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-card .auth-subtitle {
+            text-align: center;
+            color: var(--muted-foreground);
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
+        }
+
+        .auth-toggle {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--muted-foreground);
+            font-size: 0.875rem;
+        }
+
+        .auth-toggle button {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: inherit;
+            margin-left: 0.25rem;
+        }
+
+        .auth-toggle button:hover {
+            text-decoration: underline;
+        }
+
+        /* ==================== FORMS ==================== */
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .form-label i {
+            color: var(--accent);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--background);
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--foreground);
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .form-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+        }
+
+        .form-section h4 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            font-size: 0.9375rem;
+        }
+
+        .form-section h4 i {
+            color: var(--accent);
+        }
+
+        .checkbox-label,
+        .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            margin-bottom: 0.5rem;
+            font-size: 0.9375rem;
+        }
+
+        input[type="checkbox"],
+        input[type="radio"] {
+            width: 1rem;
+            height: 1rem;
+            accent-color: var(--accent);
+            cursor: pointer;
+        }
+
+        input[type="color"] {
+            width: 4rem;
+            height: 2.5rem;
+            padding: 0;
+            cursor: pointer;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 0.5rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            accent-color: var(--accent);
+        }
+
+        .range-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .range-value {
+            font-weight: 600;
+            min-width: 3rem;
+        }
+
+        /* ==================== PROFILE SECTION ==================== */
+        .profile-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .profile-content {
+                flex-direction: row;
+                justify-content: space-between;
+                text-align: left;
+            }
+        }
+
+        .profile-left {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .profile-left {
+                flex-direction: row;
+                gap: 1.5rem;
+            }
+        }
+
+        .profile-avatar {
+            width: 5rem;
+            height: 5rem;
+            border-radius: 50%;
+            border: 4px solid var(--accent);
+            background: var(--muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: transform 0.2s;
+            flex-shrink: 0;
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        @media (min-width: 768px) {
+            .profile-avatar {
+                width: 6rem;
+                height: 6rem;
+            }
+        }
+
+        .profile-avatar:hover {
+            transform: scale(1.05);
+        }
+
+        .profile-avatar i {
+            font-size: 2rem;
+            color: var(--muted-foreground);
+        }
+
+        @media (min-width: 768px) {
+            .profile-avatar i {
+                font-size: 2.5rem;
+            }
+        }
+
+        .profile-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+        }
+
+        @media (min-width: 768px) {
+            .profile-info h3 {
+                font-size: 1.5rem;
+            }
+        }
+
+        .profile-info p {
+            color: var(--muted-foreground);
+            font-size: 0.875rem;
+        }
+
+        .profile-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .profile-buttons {
+                gap: 0.75rem;
+            }
+        }
+
+        /* ==================== SETTINGS MODAL ==================== */
+        #settings-overlay {
+            position: fixed;
+            inset: 0;
+            background: hsla(0, 0%, 0%, 0.55);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 1rem;
+        }
+
+        .settings-modal {
+            background: var(--card);
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-hover);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .settings-modal {
+                padding: 2rem;
+            }
+        }
+
+        .settings-header {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .settings-header h2 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.25rem;
+            margin: 0;
+        }
+
+        .settings-header button {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .settings-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (min-width: 480px) {
+            .settings-row {
+                grid-template-columns: 1fr 1fr;
+                gap: 1.25rem;
+            }
+        }
+
+        .settings-col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .settings-single {
+            margin-bottom: 1rem;
+        }
+
+        /* ==================== GENRE SECTION ==================== */
+        .genre-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (min-width: 480px) {
+            .genre-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .genre-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.25rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .genre-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+
+        .genre-box {
+            background: linear-gradient(180deg, var(--card) 0%, var(--card-hover) 100%);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1rem;
+            transition: all 0.2s;
+        }
+
+        .genre-box:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .genre-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .genre-header i {
+            font-size: 1.25rem;
+            color: var(--accent);
+        }
+
+        .genre-header h4 {
+            margin: 0;
+            font-size: 0.9375rem;
+            font-weight: bold;
+        }
+
+        .genre-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.375rem;
+        }
+
+        .genre-options label {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            font-size: 0.8125rem;
+            cursor: pointer;
+            transition: color 0.12s;
+            line-height: 1.4;
+        }
+
+        .genre-options label:hover {
+            color: var(--accent);
+        }
+
+        .genre-options input[type="checkbox"] {
+            margin-top: 0.125rem;
+            flex-shrink: 0;
+        }
+
+        .genre-controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .genre-controls {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.75rem;
+            }
+        }
+
+        .genre-controls .btn {
+            width: 100%;
+            max-width: 200px;
+        }
+
+        @media (min-width: 640px) {
+            .genre-controls .btn {
+                width: auto;
+            }
+        }
+
+        /* ==================== FOOTER ==================== */
+        .footer {
+            background: linear-gradient(180deg, #7e3434 0%, #3D0C11 100%);
+            color: var(--cream-light);
+        }
+
+        .footer-content {
+            padding: 2rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .footer-content {
+                padding: 3rem 0;
+            }
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #F0EBDC;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer-brand {
+                font-size: 1.5rem;
+            }
+        }
+
+        .footer-brand svg {
+            width: 32px;
+            height: 32px;
+            padding-left: 1rem;
+        }
+
+        .footer-text {
+            color: rgba(240, 235, 220, 0.8);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer-text {
+                font-size: 1rem;
+            }
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.75rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .social-links {
+                gap: 0.75rem;
+            }
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: rgba(240, 235, 220, 0.1);
+            border-radius: 50%;
+            transition: background 0.3s;
+            color: #F0EBDC;
+            text-decoration: none;
+        }
+
+        @media (min-width: 768px) {
+            .social-link {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        .social-link:hover {
+            background: rgba(240, 235, 220, 0.2);
+        }
+
+        .social-link svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        @media (min-width: 768px) {
+            .social-link svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        .footer-bottom {
+            border-top: 1px solid hsla(40, 35%, 93%, 0.1);
+            padding: 1rem 0;
+        }
+
+        .footer-bottom-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8125rem;
+            color: hsla(40, 35%, 93%, 0.6);
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .footer-bottom-inner {
+                flex-direction: row;
+                justify-content: space-between;
+                font-size: 0.875rem;
+            }
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer-links {
+                gap: 1.5rem;
+            }
+        }
+
+        .footer-links a {
+            color: rgba(240, 235, 220, 0.6);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--cream-light);
+        }
+
+        /* ==================== UTILITIES ==================== */
+        .hidden {
+            display: none !important;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        main {
+            padding: 0 1rem 2rem;
+        }
+
+        @media (min-width: 768px) {
+            main {
+                padding: 0 1rem 4rem;
+            }
+        }
+
+        /* ==================== TOAST ==================== */
+        .toast-container {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            pointer-events: none;
+        }
+
+        @media (min-width: 640px) {
+            .toast-container {
+                bottom: 1.5rem;
+                right: 1.5rem;
+            }
+        }
+
+        .toast {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            min-width: 280px;
+            max-width: 400px;
+            padding: 1rem 1.25rem;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-medium);
+            pointer-events: auto;
+            animation: toast-slide-in 0.3s ease-out;
+        }
+
+        .toast.toast-hiding {
+            animation: toast-slide-out 0.2s ease-in forwards;
+        }
+
+        .toast-success {
+            border-left: 4px solid hsl(142, 70%, 45%);
+        }
+
+        .toast-error {
+            border-left: 4px solid var(--accent);
+        }
+
+        .toast-info {
+            border-left: 4px solid hsl(210, 70%, 50%);
+        }
+
+        .toast-warning {
+            border-left: 4px solid hsl(45, 90%, 50%);
+        }
+
+        .toast-icon {
+            flex-shrink: 0;
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+
+        .toast-success .toast-icon {
+            color: hsl(142, 70%, 45%);
+        }
+
+        .toast-error .toast-icon {
+            color: var(--accent);
+        }
+
+        .toast-info .toast-icon {
+            color: hsl(210, 70%, 50%);
+        }
+
+        .toast-warning .toast-icon {
+            color: hsl(45, 90%, 50%);
+        }
+
+        .toast-content {
+            flex: 1;
+        }
+
+        .toast-title {
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--foreground);
+            margin-bottom: 0.125rem;
+        }
+
+        .toast-message {
+            font-size: 0.8125rem;
+            color: var(--muted-foreground);
+        }
+
+        .toast-close {
+            flex-shrink: 0;
+            background: none;
+            border: none;
+            padding: 0.25rem;
+            cursor: pointer;
+            color: var(--muted-foreground);
+            opacity: 0.6;
+            transition: opacity 0.2s;
+        }
+
+        .toast-close:hover {
+            opacity: 1;
+        }
+
+        @keyframes toast-slide-in {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes toast-slide-out {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        .btn-full {
+            width: 100%;
+        }
+
+        .btn-center {
+            display: flex;
+            margin: 0 auto;
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        /* Modal Container */
+        .modal-container {
+            background-color: var(--background);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-medium);
+            width: 100%;
+            max-width: 540px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid var(--rose-light);
+            animation: scaleIn 0.3s ease;
+        }
+
+        /* Modal Header */
+        .modal-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 1.25rem;
+            background: linear-gradient(to right, var(--card), var(--muted));
+            border-bottom: 1px solid hsla(0, 35%, 62%, 0.3);
+        }
+
+        .modal-header-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: hsla(0, 50%, 55%, 0.1);
+            color: var(--accent);
+            border-radius: 50%;
+            font-size: 1.25rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--foreground);
+        }
+
+        .modal-close {
+            margin-left: auto;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--muted-foreground);
+            cursor: pointer;
+            padding: 0.25rem;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+
+        .modal-close:hover {
+            color: var(--foreground);
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1.25rem;
+            background-color: hsla(32, 45%, 85%, 0.3);
+            border-bottom: 1px solid hsla(0, 35%, 62%, 0.2);
+            font-size: 0.875rem;
+        }
+
+        .stats-bar .count {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--muted-foreground);
+        }
+
+        .stats-bar .count strong {
+            color: var(--foreground);
+        }
+
+        .stats-bar .total {
+            color: var(--muted-foreground);
+        }
+
+        .stats-bar .total-amount {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        /* Modal Body */
+        .modal-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .modal-body::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .modal-body::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .modal-body::-webkit-scrollbar-thumb {
+            background-color: var(--rose);
+            border-radius: 3px;
+        }
+
+        /* Purchase Item */
+        .purchase-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+        }
+
+        .purchase-item:hover {
+            box-shadow: var(--shadow-medium);
+            transform: translateY(-2px);
+        }
+
+        .book-cover {
+            flex-shrink: 0;
+            width: 80px;
+            height: 112px;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+
+        .book-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .purchase-item:hover .book-cover img {
+            transform: scale(1.05);
+        }
+
+        .book-cover::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 0.5rem;
+            box-shadow: inset 0 0 0 1px hsla(354, 60%, 15%, 0.1);
+        }
+
+        .book-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 0.25rem 0;
+        }
+
+        .book-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--foreground);
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .book-author {
+            font-size: 0.875rem;
+            color: var(--muted-foreground);
+            margin-top: 0.25rem;
+        }
+
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.625rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            border-radius: 0.375rem;
+        }
+
+        .badge-format {
+            background-color: var(--secondary);
+            color: var(--secondary-foreground);
+        }
+
+        .badge-delivered {
+            background-color: hsl(145, 60%, 90%);
+            color: hsl(145, 60%, 30%);
+            border: 1px solid hsl(145, 60%, 80%);
+        }
+
+        .badge-processing {
+            background-color: hsla(32, 67%, 74%, 0.3);
+            color: var(--golden-accent);
+            border: 1px solid var(--golden);
+        }
+
+        .badge-shipped {
+            background-color: hsla(0, 35%, 80%, 0.3);
+            color: var(--rose-dark);
+            border: 1px solid var(--rose-light);
+        }
+
+        .book-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+        }
+
+        .purchase-date {
+            font-size: 0.75rem;
+            color: var(--muted-foreground);
+        }
+
+        .book-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        /* Modal Footer */
+        .modal-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1.25rem;
+            background-color: hsla(32, 45%, 85%, 0.2);
+            border-top: 1px solid hsla(0, 35%, 62%, 0.3);
+        }
+
+        .modal-footer p {
+            font-size: 0.75rem;
+            color: var(--muted-foreground);
+        }
+
+        .btn-ghost {
+            background: none;
+            border: none;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            color: var(--muted-foreground);
+            cursor: pointer;
+            border-radius: 0.375rem;
+            transition: all 0.2s;
+        }
+
+        .btn-ghost:hover {
+            background-color: var(--muted);
+            color: var(--foreground);
+        }
+
+        /* Preferences Section Background */
+        #preferences-section {
+            background-color: #f4efe6;
+        }
+
+        /* Genre Section Background */
+        #genre-section {
+            background-color: #f4efe6;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .purchase-item {
+            animation: slideUp 0.4s ease forwards;
+        }
+
+        .purchase-item:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .purchase-item:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .purchase-item:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .purchase-item:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+
+        /* Responsive */
+        @media (min-width: 640px) {
+            .modal-title {
+                font-size: 1.5rem;
+            }
+
+            .book-cover {
+                width: 96px;
+                height: 128px;
+            }
+
+            .book-title {
+                font-size: 1.25rem;
+            }
+
+            .modal-header,
+            .stats-bar,
+            .modal-body,
+            .modal-footer {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-inner">
+                <a href="/" class="nav-logo">
+                    <span>Page & Paper</span>
+                </a>
+
+                <div class="nav-links">
+                    <a href="/" class="nav-link">Home Page</a>
+                    <a href="/about-us" class="nav-link">About Us</a>
+                    <a href="/owner-founder" class="nav-link">Owner/Founder</a>
+                </div>
+
+                <button class="nav-menu-btn" onclick="toggleMenu()" aria-label="Toggle menu">
+                    <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                    <svg id="close-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="nav-mobile" id="mobile-menu">
+                <a href="/" class="nav-mobile-link">Home Page</a>
+                <a href="/about-us" class="nav-mobile-link">About Us</a>
+                <a href="/owner-founder" class="nav-mobile-link">Owner/Founder</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <img src="/static/banners/Dashboard Banner.png" alt="Page & Paper Bookstore" class="hero-img">
+    </header>
+
+    <!-- AUTH PAGE -->
+    <div id="auth-page">
+        <div id="auth-container">
+            <div class="auth-form-wrapper">
+                <div class="auth-card">
+                    <div class="icon-header">
+                        <i class="bi bi-person-circle"></i>
+                    </div>
+                    <h2 id="auth-title">Welcome Back</h2>
+                    <p class="auth-subtitle" id="auth-subtitle">Sign in to access your reading dashboard</p>
+
+                    <form id="auth-form">
+                        <div id="name-field" class="form-group hidden">
+                            <label class="form-label">
+                                <i class="bi bi-person"></i>
+                                Full Name
+                            </label>
+                            <input type="text" id="auth-name" class="form-input" placeholder="Your name">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="bi bi-envelope"></i>
+                                Email Address
+                            </label>
+                            <input type="email" id="auth-email" class="form-input" placeholder="your.email@example.com"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="bi bi-lock"></i>
+                                Password
+                            </label>
+                            <input type="password" id="auth-password" class="form-input" placeholder="••••••••" required
+                                minlength="6">
+                        </div>
+
+                        <button type="submit" id="auth-submit" class="btn btn-primary btn-full">
+                            <i class="bi bi-box-arrow-in-right"></i>
+                            <span id="auth-submit-text">Sign In</span>
+                        </button>
+                    </form>
+
+                    <div class="auth-toggle">
+                        <span id="auth-toggle-text">Don't have an account?</span>
+                        <button type="button" id="auth-toggle-btn">Sign Up</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DASHBOARD PAGE -->
+    <div id="dashboard-page" class="hidden">
+        <main>
+            <!-- Profile Section -->
+            <section id="profile-section">
+                <div class="profile-content">
+                    <div class="profile-left">
+                        <div class="profile-avatar" id="open-settings">
+                            <img id="profile-avatar-img" src="" alt="Avatar" class="hidden">
+                            <i id="profile-avatar-icon" class="bi bi-person-fill"></i>
+                        </div>
+                        <div class="profile-info">
+                            <h3 id="profile-name">Reader</h3>
+                            <p id="profile-email">user@email.com</p>
+                        </div>
+                    </div>
+                    <div class="profile-buttons">
+                        <button type="button" id="my-cart-btn" class="btn btn-accent">
+                            <i class="bi bi-cart-fill"></i>
+                            My Purchases
+                        </button>
+                        <button type="button" id="settings-btn" class="btn btn-outline">
+                            <i class="bi bi-gear-fill"></i>
+                            Settings
+                        </button>
+                        <button type="button" id="sign-out-btn" class="btn btn-outline">
+                            <i class="bi bi-box-arrow-right"></i>
+                            Sign Out
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ACCOUNT SETTINGS OVERLAY -->
+            <div id="settings-overlay" class="hidden">
+                <div class="settings-modal">
+                    <div class="settings-header">
+                        <h2><i class="bi bi-gear-fill"></i> Account Settings</h2>
+                        <button id="close-settings">&times;</button>
+                    </div>
+
+                    <form id="settings-form">
+                        <div class="settings-row">
+                            <div class="settings-col">
+                                <label class="form-label">
+                                    <i class="bi bi-image"></i> Profile Picture
+                                </label>
+                                <div class="profile-image-container">
+                                    <img id="current-profile-image" src="" alt="Profile Image"
+                                        style="display: none; width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 10px;">
+                                    <input type="file" id="settings-avatar" accept="image/*" class="form-input">
+                                </div>
+                            </div>
+                            <div class="settings-col">
+                                <label class="form-label">
+                                    <i class="bi bi-person"></i> Display Name
+                                </label>
+                                <input type="text" id="settings-name" class="form-input">
+                            </div>
+                        </div>
+
+                        <div class="settings-row">
+                            <div class="settings-col">
+                                <label class="form-label">
+                                    <i class="bi bi-geo-alt"></i> Address
+                                </label>
+                                <input type="text" id="settings-address" class="form-input">
+                            </div>
+                            <div class="settings-col">
+                                <label class="form-label">
+                                    <i class="bi bi-telephone"></i> Phone Number
+                                </label>
+                                <input type="text" id="settings-phone" class="form-input">
+                            </div>
+                        </div>
+
+                        <div class="settings-single">
+                            <label class="form-label">
+                                <i class="bi bi-envelope-check"></i> Email Verification
+                            </label>
+                            <input type="email" id="settings-email" class="form-input" disabled>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-accent">
+                                <i class="bi bi-save"></i> Save Changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- PURCHASES MODAL -->
+            <!-- Modal -->
+            <div class="modal-overlay" id="purchases-modal">
+                <div class="modal-container">
+                    <div class="modal-header">
+                        <div class="modal-header-icon">
+                            <i class="bi bi-book"></i>
+                        </div>
+                        <h2 class="modal-title">My Purchases</h2>
+                        <button class="modal-close" id="modal-close">&times;</button>
+                    </div>
+
+                    <div class="stats-bar">
+                        <div class="count">
+                            <i class="bi bi-box-seam"></i>
+                            <span><strong>4</strong> books</span>
+                        </div>
+                        <div class="total">
+                            Total: <span class="total-amount">₱66.46</span>
+                        </div>
+                    </div>
+
+                    <div class="modal-body" id="purchases-content">
+                    </div>
+
+                    <div class="modal-footer">
+                        <p>Questions? Contact support</p>
+                        <button class="btn-ghost" id="modal-close-btn">Close</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preferences Section -->
+            <section id="preferences-section">
+                <h2>Reading Preferences & User Settings</h2>
+                <p class="subtitle">Customize how you read and interact with Page & Paper!</p>
+
+                <form id="preferences-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="bi bi-palette-fill"></i>
+                                Change background color:
+                            </label>
+                            <input type="color" id="theme-color" value="#EAE2C6">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="bi bi-list-ol"></i>
+                                Reading Progress Level:
+                            </label>
+                            <div class="range-container">
+                                <input type="range" id="reading-progress" min="1" max="100" value="50">
+                                <span class="range-value" id="progress-value">50%</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="bi bi-clock"></i>
+                                Time you usually read:
+                            </label>
+                            <input type="time" id="reading-time" class="form-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="bi bi-link-45deg"></i>
+                                Favorite book URL:
+                            </label>
+                            <input type="url" id="favorite-url" class="form-input" placeholder="https://...">
+                        </div>
+
+                        <div class="form-section">
+                            <h4><i class="bi bi-envelope-paper-heart"></i> Send Me Updates</h4>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="store-details" name="updates" value="details">
+                                Store details
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="pricing-updates" name="updates" value="prices">
+                                Pricing updates
+                            </label>
+                        </div>
+
+                        <div class="form-section">
+                            <h4><i class="bi bi-journal-bookmark-fill"></i> How Do You See Page & Paper?</h4>
+                            <label class="radio-label">
+                                <input type="radio" name="definition" value="books">
+                                Books Website
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="definition" value="collections">
+                                Book Collections
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="definition" value="storyline">
+                                Storyline-focused
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="reset" class="btn btn-outline">
+                            <i class="bi bi-arrow-counterclockwise"></i>
+                            Reset
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-check2-circle"></i>
+                            Apply Changes
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Genre Section -->
+            <section id="genre-section">
+                <h2>Choose For Me — Book Genres</h2>
+                <p class="subtitle">Pick genres or let Page & Paper choose a random title for you.</p>
+
+                <form id="genre-form">
+                    <div class="form-group" style="max-width: 100%; margin-bottom: 1.5rem;">
+                        <label class="form-label">
+                            <i class="bi bi-search-heart"></i>
+                            Search a Genre:
+                        </label>
+                        <input type="text" id="genre-search" class="form-input" list="genre-list"
+                            placeholder="Start typing...">
+                        <datalist id="genre-list">
+                            <option value="Romance">
+                            <option value="Poem">
+                            <option value="Science Fiction">
+                            <option value="Mystery">
+                            <option value="Fantasy">
+                        </datalist>
+                    </div>
+
+                    <div class="genre-grid">
+                        <!-- Romance -->
+                        <div class="genre-box">
+                            <div class="genre-header">
+                                <i class="bi bi-heart-fill"></i>
+                                <h4>Romance</h4>
+                            </div>
+                            <div class="genre-options">
+                                <label><input type="checkbox" name="romance" value="The Spanish Love Deception"> The
+                                    Spanish Love
+                                    Deception</label>
+                                <label><input type="checkbox" name="romance" value="Red, White & Royal Blue"> Red, White
+                                    & Royal
+                                    Blue</label>
+                                <label><input type="checkbox" name="romance" value="Deep End"> Deep End</label>
+                            </div>
+                        </div>
+
+                        <!-- Poem -->
+                        <div class="genre-box">
+                            <div class="genre-header">
+                                <i class="bi bi-journal-text"></i>
+                                <h4>Poem</h4>
+                            </div>
+                            <div class="genre-options">
+                                <label><input type="checkbox" name="poem" value="Milk and Honey"> Milk and Honey</label>
+                                <label><input type="checkbox" name="poem" value="The Sun and Her Flowers"> The Sun and
+                                    Her
+                                    Flowers</label>
+                                <label><input type="checkbox" name="poem" value="Pillow Thoughts"> Pillow
+                                    Thoughts</label>
+                            </div>
+                        </div>
+
+                        <!-- Science Fiction -->
+                        <div class="genre-box">
+                            <div class="genre-header">
+                                <i class="bi bi-rocket-fill"></i>
+                                <h4>Science Fiction</h4>
+                            </div>
+                            <div class="genre-options">
+                                <label><input type="checkbox" name="scifi" value="Dune"> Dune</label>
+                                <label><input type="checkbox" name="scifi" value="Enders Game"> Ender's Game</label>
+                                <label><input type="checkbox" name="scifi" value="The Martian"> The Martian</label>
+                            </div>
+                        </div>
+
+                        <!-- Mystery -->
+                        <div class="genre-box">
+                            <div class="genre-header">
+                                <i class="bi bi-search"></i>
+                                <h4>Mystery / Thriller</h4>
+                            </div>
+                            <div class="genre-options">
+                                <label><input type="checkbox" name="mystery" value="Gone Girl"> Gone Girl</label>
+                                <label><input type="checkbox" name="mystery" value="The Girl with the Dragon Tattoo">
+                                    The Girl with the
+                                    Dragon Tattoo</label>
+                                <label><input type="checkbox" name="mystery" value="The Silent Patient"> The Silent
+                                    Patient</label>
+                            </div>
+                        </div>
+
+                        <!-- Fantasy -->
+                        <div class="genre-box">
+                            <div class="genre-header">
+                                <i class="bi bi-stars"></i>
+                                <h4>Fantasy</h4>
+                            </div>
+                            <div class="genre-options">
+                                <label><input type="checkbox" name="fantasy" value="Harry Potter"> Harry Potter</label>
+                                <label><input type="checkbox" name="fantasy" value="The Hobbit"> The Hobbit</label>
+                                <label><input type="checkbox" name="fantasy" value="A Court of Thorns and Roses"> A
+                                    Court of Thorns and
+                                    Roses</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="genre-controls">
+                        <button type="button" id="choose-btn" class="btn btn-primary">
+                            <i class="bi bi-magic"></i>
+                            Choose For Me
+                        </button>
+                        <button type="button" id="clear-btn" class="btn btn-outline">
+                            Clear Selection
+                        </button>
+                        <button type="button" id="select-all-btn" class="btn btn-outline">
+                            Select All Genres
+                        </button>
+                        <button type="button" id="save-genres-btn" class="btn btn-accent">
+                            <i class="bi bi-save"></i>
+                            Save Selection
+                        </button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // ==================== TOAST SYSTEM ====================
+        function showToast(type, title, message, duration = 4000) {
+            const container = document.getElementById('toast-container');
+
+            const icons = {
+                success: '<svg class="toast-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>',
+                error: '<svg class="toast-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" stroke-width="2" d="M15 9l-6 6M9 9l6 6"/></svg>',
+                info: '<svg class="toast-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" stroke-width="2" d="M12 16v-4M12 8h.01"/></svg>',
+                warning: '<svg class="toast-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>'
+            };
+
+            const toast = document.createElement('div');
+            toast.className = 'toast toast-' + type;
+            toast.innerHTML = `
+                    ${icons[type] || icons.info}
+                    <div class="toast-content">
+                        <div class="toast-title">${title}</div>
+                        ${message ? '<div class="toast-message">' + message + '</div>' : ''}
+                    </div>
+                    <button class="toast-close" onclick="closeToast(this.parentElement)">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                `;
+
+            container.appendChild(toast);
+
+            if (duration > 0) {
+                setTimeout(() => closeToast(toast), duration);
+            }
+
+            return toast;
+        }
+
+        function closeToast(toast) {
+            if (!toast || toast.classList.contains('toast-hiding')) return;
+            toast.classList.add('toast-hiding');
+            setTimeout(() => toast.remove(), 200);
+        }
+
+        // Global user data
+        let currentUser = null;
+        const API_BASE_URL = window.location.origin;
+
+        // Check if user is already logged in on page load
+        async function checkAuthStatus() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/user`, { credentials: 'include' });
+                if (response.ok) {
+                    currentUser = await response.json();
+                    showDashboard(currentUser);
+                } else {
+                    showAuthPage();
+                }
+            } catch (error) {
+                console.error('Auth check failed:', error);
+                // Don't show error toast on page load, just show auth page
+                showAuthPage();
+            }
+        }
+
+        function showAuthPage() {
+            document.getElementById('auth-page').classList.remove('hidden');
+            document.getElementById('dashboard-page').classList.add('hidden');
+        }
+
+        function showDashboard(user) {
+            console.log('showDashboard called with user:', user);
+            const avatarImg = document.getElementById('profile-avatar-img');
+            const avatarIcon = document.getElementById('profile-avatar-icon');
+
+            if (user.profile_image) {
+                avatarImg.src = user.profile_image;
+                avatarImg.classList.remove('hidden');
+                avatarIcon.classList.add('hidden');
+            } else {
+                avatarImg.classList.add('hidden');
+                avatarIcon.classList.remove('hidden');
+            }
+
+            document.getElementById('settings-avatar').addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                const reader = new FileReader();
+                reader.onload = () => {
+                    const avatarImg = document.getElementById('profile-avatar-img');
+                    const avatarIcon = document.getElementById('profile-avatar-icon');
+
+                    avatarImg.src = reader.result;
+                    avatarImg.classList.remove('hidden');
+                    avatarIcon.classList.add('hidden');
+                };
+                reader.readAsDataURL(file);
+            });
+
+            currentUser = user;
+            document.getElementById('auth-page').classList.add('hidden');
+            document.getElementById('dashboard-page').classList.remove('hidden');
+
+            // Populate user data
+            document.getElementById('profile-name').textContent = user.name;
+            document.getElementById('profile-email').textContent = user.email;
+            document.getElementById('settings-email').value = user.email;
+            document.getElementById('settings-name').value = user.name;
+
+            // Display profile image if exists
+            const profileImage = document.getElementById('current-profile-image');
+            if (user.profile_image) {
+                profileImage.src = user.profile_image;
+                profileImage.style.display = 'block';
+            } else {
+                profileImage.style.display = 'none';
+            }
+
+            // Populate other fields
+            if (user.address) document.getElementById('settings-address').value = user.address;
+            if (user.phone) document.getElementById('settings-phone').value = user.phone;
+
+            // Load preferences
+            if (user.preferences) {
+                document.getElementById('theme-color').value = user.preferences.theme_color || '#EAE2C6';
+                document.getElementById('reading-progress').value = user.preferences.reading_progress || 50;
+                document.getElementById('progress-value').textContent = (user.preferences.reading_progress || 50) + '%';
+                document.getElementById('reading-time').value = user.preferences.reading_time || '';
+                document.getElementById('favorite-url').value = user.preferences.favorite_url || '';
+
+                // Load checkboxes
+                if (user.preferences.updates) {
+                    user.preferences.updates.forEach(update => {
+                        const checkbox = document.getElementById(update);
+                        if (checkbox) checkbox.checked = true;
+                    });
+                }
+            }
+
+            // Load saved genres
+            if (user.genres && user.genres.length > 0) {
+                user.genres.forEach(genreValue => {
+                    const checkbox = document.querySelector(`input[value="${genreValue}"]`);
+                    if (checkbox) checkbox.checked = true;
+                });
+            }
+        }
+
+        // Toggle mobile menu
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+
+            menu.classList.toggle('active');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        }
+
+        // Auth toggle
+        let isLogin = true;
+        const authToggleBtn = document.getElementById('auth-toggle-btn');
+        const authTitle = document.getElementById('auth-title');
+        const authSubtitle = document.getElementById('auth-subtitle');
+        const authSubmitText = document.getElementById('auth-submit-text');
+        const authToggleText = document.getElementById('auth-toggle-text');
+        const nameField = document.getElementById('name-field');
+
+        authToggleBtn.addEventListener('click', () => {
+            isLogin = !isLogin;
+            if (isLogin) {
+                authTitle.textContent = 'Welcome Back';
+                authSubtitle.textContent = 'Sign in to access your reading dashboard';
+                authSubmitText.textContent = 'Sign In';
+                authToggleText.textContent = "Don't have an account?";
+                authToggleBtn.textContent = 'Sign Up';
+                nameField.classList.add('hidden');
+            } else {
+                authTitle.textContent = 'Create Account';
+                authSubtitle.textContent = 'Join our community of book lovers';
+                authSubmitText.textContent = 'Create Account';
+                authToggleText.textContent = 'Already have an account?';
+                authToggleBtn.textContent = 'Sign In';
+                nameField.classList.remove('hidden');
+            }
+        });
+
+        // Auth form submit
+        document.getElementById('auth-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('auth-email').value;
+            const password = document.getElementById('auth-password').value;
+            const name = document.getElementById('auth-name').value;
+
+            const endpoint = isLogin ? `${API_BASE_URL}/api/login` : `${API_BASE_URL}/api/register`;
+            const payload = isLogin ? { email, password } : { name, email, password };
+
+            try {
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                console.log('AUTH RESPONSE:', result);
+
+                if (response.ok) {
+                    console.log('Auth successful, result:', result);
+                    showDashboard(result.user);
+                } else {
+                    showToast('error', 'Login Failed', result.error || 'Invalid email or password. Please try again.');
+                }
+            } catch (error) {
+                console.error('Auth error:', error);
+                if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                    showToast('error', 'Connection Error', 'Unable to connect to server. Please try again.');
+                } else {
+                    showToast('error', 'Connection Error', 'Unable to connect to the server. Please check your internet connection and try again.');
+                }
+            }
+        });
+
+        // Sign out
+        document.getElementById('sign-out-btn').addEventListener('click', async () => {
+            try {
+                await fetch(`${API_BASE_URL}/api/logout`, { method: 'POST', credentials: 'include' });
+                currentUser = null;
+                showAuthPage();
+            } catch (error) {
+                console.error('Logout error:', error);
+                // Still show auth page even if logout request fails
+                showAuthPage();
+            }
+        });
+
+        // Settings modal
+        document.getElementById('open-settings').addEventListener('click', () => {
+            document.getElementById('settings-overlay').classList.remove('hidden');
+        });
+
+        document.getElementById('settings-btn').addEventListener('click', () => {
+            document.getElementById('settings-overlay').classList.remove('hidden');
+        });
+
+        document.getElementById('close-settings').addEventListener('click', () => {
+            document.getElementById('settings-overlay').classList.add('hidden');
+        });
+
+        document.getElementById('settings-overlay').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('settings-overlay')) {
+                document.getElementById('settings-overlay').classList.add('hidden');
+            }
+        });
+
+        // Purchases modal
+        document.getElementById('my-cart-btn').addEventListener('click', async () => {
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/orders`, { credentials: 'include' });
+                if (response.ok) {
+                    const orders = await response.json();
+                    const content = document.getElementById('purchases-content');
+                    const countEl = document.querySelector('.stats-bar .count strong');
+                    const totalEl = document.querySelector('.stats-bar .total-amount');
+
+                    if (orders.length === 0) {
+                        content.innerHTML = '<p>You have no purchases yet.</p>';
+                        countEl.textContent = '0';
+                        totalEl.textContent = '₱0.00';
+                    } else {
+                        const totalBooks = orders.reduce((sum, order) => sum + order.quantity, 0);
+                        const total = orders.reduce((sum, order) => sum + (parseFloat(order.price) * order.quantity), 0).toFixed(2);
+                        countEl.textContent = totalBooks;
+                        totalEl.textContent = `₱${total}`;
+
+                        content.innerHTML = orders.map(order => {
+                            let imgSrc = '/static/books/' + encodeURIComponent(order.title) + '.jpg';
+                            if (order.image) {
+                                if (order.image.startsWith('/') || order.image.startsWith('http')) {
+                                    imgSrc = order.image;
+                                } else {
+                                    imgSrc = '/static/books/' + order.image;
+                                }
+                            }
+
+                            const orderTotal = (parseFloat(order.price) * order.quantity).toFixed(2);
+
+                            return `
+                            <div class="purchase-item">
+                                <div class="book-cover">
+                                    <img src="${imgSrc}" alt="${order.title}" onerror="this.src='/static/book_icon.jpg'">
+                                </div>
+                                <div class="book-details">
+                                    <h3 class="book-title">${order.title}</h3>
+                                    <p class="book-author">by ${order.author}</p>
+                                    <div class="badges">
+                                        <span class="badge badge-format">Paperback</span>
+                                        <span class="badge badge-delivered">Delivered</span>
+                                    </div>
+                                    <div class="book-footer">
+                                        <span class="purchase-date">${new Date(order.timestamp).toLocaleDateString()}</span>
+                                        <div style="display: flex; flex-direction: column; align-items: flex-end;">
+                                            <span style="font-size: 0.75rem; color: var(--muted-foreground); margin-bottom: 0.25rem;">Qty: ${order.quantity}</span>
+                                            <span class="book-price">₱${orderTotal}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        }).join('');
+                    }
+                } else {
+                    showToast('error', 'Error', 'Failed to load purchases.');
+                }
+            } catch (error) {
+                console.error('Purchases error:', error);
+                showToast('error', 'Connection Error', 'Unable to load purchases.');
+            }
+            document.getElementById('purchases-modal').classList.add('active');
+        });
+
+        document.getElementById('modal-close').addEventListener('click', () => {
+            document.getElementById('purchases-modal').classList.remove('active');
+        });
+
+        document.getElementById('modal-close-btn').addEventListener('click', () => {
+            document.getElementById('purchases-modal').classList.remove('active');
+        });
+
+        document.getElementById('purchases-modal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('purchases-modal')) {
+                document.getElementById('purchases-modal').classList.remove('active');
+            }
+        });
+
+        // Settings form
+        document.getElementById('settings-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData();
+
+            // Add text fields
+            const name = document.getElementById('settings-name').value;
+            const address = document.getElementById('settings-address').value;
+            const phone = document.getElementById('settings-phone').value;
+
+            if (name) formData.append('name', name);
+            if (address) formData.append('address', address);
+            if (phone) formData.append('phone', phone);
+
+            // Add profile image if selected
+            const avatarFile = document.getElementById('settings-avatar').files[0];
+            if (avatarFile) {
+                formData.append('profile_image', avatarFile);
+            }
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/user/update`, {
+                    method: 'POST',
+                    credentials: 'include',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    // Update displayed name
+                    if (name) {
+                        document.getElementById('profile-name').textContent = name;
+                        if (currentUser) currentUser.name = name;
+                    }
+
+                    // Refresh user data to get updated profile image
+                    const userResponse = await fetch(`${API_BASE_URL}/api/user`, { credentials: 'include' });
+                    if (userResponse.ok) {
+                        const updatedUser = await userResponse.json();
+                        currentUser = updatedUser;
+
+                        // Update profile image display
+                        const profileImage = document.getElementById('current-profile-image');
+                        if (updatedUser.profile_image) {
+                            profileImage.src = updatedUser.profile_image;
+                            profileImage.style.display = 'block';
+                        }
+                    }
+
+                    document.getElementById('settings-overlay').classList.add('hidden');
+                    showToast('success', 'Profile Updated!', 'Your profile has been updated successfully.');
+                } else {
+                    const result = await response.json();
+                    showToast('error', 'Update Failed', result.error || 'Unable to update profile. Please try again.');
+                }
+            } catch (error) {
+                console.error('Update error:', error);
+                if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                    showToast('error', 'Connection Error', 'Unable to connect to server. Please try again.');
+                } else {
+                    showToast('error', 'Connection Error', 'Unable to connect to the server. Please check your internet connection and try again.');
+                }
+            }
+        });
+
+        // Preferences form
+        document.getElementById('preferences-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const updates = [];
+            document.querySelectorAll('#preferences-form input[name="updates"]:checked').forEach(cb => {
+                updates.push(cb.value);
+            });
+
+            const preferences = {
+                theme_color: document.getElementById('theme-color').value,
+                reading_progress: parseInt(document.getElementById('reading-progress').value),
+                reading_time: document.getElementById('reading-time').value,
+                favorite_url: document.getElementById('favorite-url').value,
+                updates: updates
+            };
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/preferences`, {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(preferences)
+                });
+
+                if (response.ok) {
+                    if (currentUser) currentUser.preferences = preferences;
+                    // Persist color locally so other pages update immediately
+                    if (window.PageAndPaperTheme && preferences.theme_color) {
+                        window.PageAndPaperTheme.set(preferences.theme_color);
+                    }
+                    showToast('success', 'Preferences Saved!', 'Your reading preferences have been updated successfully.');
+                } else {
+                    const result = await response.json();
+                    showToast('error', 'Save Failed', result.error || 'Unable to save preferences. Please try again.');
+                }
+            } catch (error) {
+                console.error('Save error:', error);
+                if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                    showToast('error', 'Connection Error', 'Unable to connect to server. Please try again.');
+                } else {
+                    showToast('error', 'Connection Error', 'Unable to connect to the server. Please check your internet connection and try again.');
+                }
+            }
+        });
+
+        // Preferences form reset
+        document.getElementById('preferences-form').addEventListener('reset', () => {
+            // Reset to default theme color
+            document.getElementById('theme-color').value = '#EAE2C6';
+            if (window.PageAndPaperTheme) {
+                window.PageAndPaperTheme.set('#EAE2C6');
+            }
+        });
+
+        // Reading progress slider
+        document.getElementById('reading-progress').addEventListener('input', (e) => {
+            document.getElementById('progress-value').textContent = e.target.value + '%';
+        });
+
+        // Genre controls
+        document.getElementById('clear-btn').addEventListener('click', () => {
+            document.querySelectorAll('#genre-form input[type="checkbox"]').forEach(cb => cb.checked = false);
+        });
+
+        document.getElementById('select-all-btn').addEventListener('click', () => {
+            document.querySelectorAll('#genre-form input[type="checkbox"]').forEach(cb => cb.checked = true);
+        });
+
+        document.getElementById('choose-btn').addEventListener('click', () => {
+            const checkboxes = document.querySelectorAll('#genre-form input[type="checkbox"]:checked');
+            if (checkboxes.length === 0) {
+                showToast('warning', 'No Selection', 'Please select at least one book first!');
+                return;
+            }
+            const books = Array.from(checkboxes).map(cb => cb.value);
+            const randomBook = books[Math.floor(Math.random() * books.length)];
+            showToast('success', 'Your Random Pick!', randomBook);
+        });
+
+        document.getElementById('save-genres-btn').addEventListener('click', async () => {
+            const checkboxes = document.querySelectorAll('#genre-form input[type="checkbox"]:checked');
+            const genres = Array.from(checkboxes).map(cb => cb.value);
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/genres`, {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ genres })
+                });
+
+                if (response.ok) {
+                    if (currentUser) currentUser.genres = genres;
+                    showToast('success', 'Genres Saved!', 'Your favorite genres have been updated successfully.');
+                } else {
+                    const result = await response.json();
+                    showToast('error', 'Save Failed', result.error || 'Unable to save genres. Please try again.');
+                }
+            } catch (error) {
+                console.error('Save error:', error);
+                if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                    showToast('error', 'Connection Error', 'Unable to connect to server. Please try again.');
+                } else {
+                    showToast('error', 'Connection Error', 'Unable to connect to the server. Please check your internet connection and try again.');
+                }
+            }
+        });
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', checkAuthStatus);
+    </script>
+
+    <!-- Global Footer -->
+    <footer class="footer">
+        <div class="footer-content container">
+            <div>
+                <div class="footer-brand">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                    </svg>
+                    <span>Page & Paper</span>
+                </div>
+                <p class="footer-text">Join our community of book lovers and receive curated recommendations,
+            exclusive
+            content, and the latest literary updates.</p>
+
+                <div class="social-links">
+                    <a href="https://facebook.com" target="_blank" class="social-link" aria-label="Facebook">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                        </svg>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" class="social-link" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                    <a href="https://twitter.com" target="_blank" class="social-link" aria-label="Twitter">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+                            </path>
+                        </svg>
+                    </a>
+                    <a href="mailto:pageandpaper@email.com" class="social-link" aria-label="Email">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                            </path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container footer-bottom-inner">
+                <p>© 2024 Page & Paper. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+    <script src="/static/js/theme.js"></script>
+</body>
+
+</html>

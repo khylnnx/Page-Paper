@@ -1,0 +1,135 @@
+[
+  {
+    "id": 1,
+    "title": "The Spanish Love Deception",
+    "author": "Elena Armas",
+    "price": 650,
+    "stock": 49,
+    "category": "Romance",
+    "tags": [
+      "Rom-Com",
+      "Fake Dating",
+      "Slow Burn"
+    ],
+    "image": "The Spanish Love Deception.jpg",
+    "description": "A delightful enemies-to-lovers romance where Catalina Mart\u00c3\u00adn desperately needs a date to her sister's wedding. Enter Aaron Blackford\u00e2\u20ac\u201dher tall, handsome, condescending colleague\u00e2\u20ac\u201dwho needs a date to his best friend's wedding. Two weddings, two best friends, one pretend relationship... What could go wrong?"
+  },
+  {
+    "id": 2,
+    "title": "You've Reached Sam",
+    "author": "Dustin Thao",
+    "price": 650,
+    "stock": 40,
+    "category": "Romance",
+    "tags": [
+      "Young Adult",
+      "Emotional",
+      "Fantasy"
+    ],
+    "image": "romance.jpg",
+    "description": "Seventeen-year-old Julie has her future all planned out\u00e2\u20ac\u201dmove out of her small town with her boyfriend Sam, attend college in the city, spend a summer in Japan. But everything changes when Sam is killed in a car accident. Desperate to hear his voice one more time, Julie calls Sam's cell phone and gets through... to whoever answers this time."
+  },
+  {
+    "id": 3,
+    "title": "Twisted Love",
+    "author": "Ana Huang",
+    "price": 600,
+    "stock": 149,
+    "category": "Romance",
+    "tags": [
+      "Enemies to Lovers",
+      "Contemporary",
+      "Series"
+    ],
+    "image": "Twisted Love.jpg",
+    "description": "He has a heart of ice... but for her, he'd burn the world. Alex Volkov is a devil blessed with the face of an angel and cursed with a past he can't escape. Driven by a tragedy that has haunted him for most of his life, his ruthless pursuits for success and vengeance leave little room for matters of the heart. But when he's forced to look after his best friend's sister, he starts to feel something in his chest. A crack. A melt. A fire he can't control."
+  },
+  {
+    "id": 4,
+    "title": "Twisted Games",
+    "author": "Ana Huang",
+    "price": 600,
+    "stock": 200,
+    "category": "Romance",
+    "tags": [
+      "Royalty",
+      "Bodyguard",
+      "Forbidden Love"
+    ],
+    "image": "Twisted Games.jpg",
+    "description": "She can never be his... but he's taking her anyway. Stood up by her fianc\u00c3\u00a9, Bridget von Ascheberg, Princess of Eldorra, has exactly one month to find a suitable replacement or she'll be forced into a marriage of convenience. And who better to serve as her fake boyfriend than Rhys Larsen, the exiled heir to the throne? But as their fake relationship turns into something dangerously real, Bridget begins to wonder if the greatest risk isn't losing the crown... but losing her heart."
+  },
+  {
+    "id": 5,
+    "title": "Twisted Lies",
+    "author": "Ana Huang",
+    "price": 600,
+    "stock": 45,
+    "category": "Romance",
+    "tags": [
+      "Fake Dating",
+      "Billionaire",
+      "Series"
+    ],
+    "image": "Twisted Lies.jpg",
+    "description": "He'll do anything to have her... including lie. Charming, deadly, and smart enough to hide it, Christian Harper is a monster dressed in the perfectly tailored suits of a gentleman. He has little use for morals and even less use for love, but he can't deny that he feels something for the woman who defies him at every turn. When the gentle and innocent Stella Alonso begins working at his company, Christian wants her... and he'll do anything to have her."
+  },
+  {
+    "id": 6,
+    "title": "Twisted Hate",
+    "author": "Ana Huang",
+    "price": 600,
+    "stock": 80,
+    "category": "Romance",
+    "tags": [
+      "Enemies to Lovers",
+      "Friends",
+      "Passion"
+    ],
+    "image": "Twisted Hate.jpg",
+    "description": "They were best friends once. But Jules and Josh haven't spoken in years... until they end up working together. Jules Ambrose is a successful marketing executive with a secret: she's been in love with her best friend for years. But when Josh Chen returns to her life, everything changes. The man who was once her everything is now her biggest rival... and the only person who can save her career."
+  },
+  {
+    "id": 7,
+    "title": "Deep End",
+    "author": "Ali Hazelwood",
+    "price": 650,
+    "stock": 49,
+    "category": "Romance",
+    "tags": [
+      "Second Chances",
+      "Self-Discovery",
+      "Women in STEM"
+    ],
+    "image": "Deep End.jpg",
+    "description": "Three years ago, Sadie Green wasn't a great swimmer. But she's been working hard ever since, training with her best friend and longtime crush Nick. Now she's ready for the Olympic trials. But when Nick shows up at her door with a proposition that will either make her career... or break her heart, Sadie has to decide if she's willing to risk everything for a chance at gold."
+  },
+  {
+    "id": 8,
+    "title": "The Road to You",
+    "author": "Flora Oakley",
+    "price": 600,
+    "stock": 59,
+    "category": "Romance",
+    "tags": [
+      "Enemies to Lovers"
+    ],
+    "image": "The Road to You.jpg",
+    "description": "When Hannah's fianc\u00c3\u00a9 cheats on her, she decides to take a road trip to clear her head. But when her car breaks down in the middle of nowhere, she's forced to accept help from the last person she wants to see: her ex-best friend and first love, Ethan. As they travel together, old feelings resurface... and Hannah begins to wonder if the road to happiness might lead back to where she started."
+  },
+  {
+    "id": 9,
+    "title": "Red, White & Royal Blue",
+    "author": "Casey McQuiston",
+    "price": 700,
+    "stock": 44,
+    "category": "Romance",
+    "tags": [
+      "LGBTQ+",
+      "Political",
+      "Enemies to Lovers"
+    ],
+    "image": "Red, White & Royal Blue.jpg",
+    "description": "The First Son of the United States and the Prince of Wales couldn't be more different. Alex Claremont-Diaz is the First Son of the United States, a brilliant, charismatic, golden child. Henry, Prince of Wales, is a posh, self-assured royal. But when the two young men are photographed brawling at a royal wedding, their feud becomes international news. The solution? A fake friendship that turns into something very real..."
+  }
+]

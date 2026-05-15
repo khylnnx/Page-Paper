@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books</title>
+
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow-x: hidden;
+            background-color: #EAE2C6;
+        }
+
+        section {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            overflow-x: auto;
+            overflow-y: hidden;
+            gap: 8px;
+            padding: 10px 20px;
+            scrollbar-width: thin;
+            scrollbar-color: #bbb #f9f9f9;
+            scroll-behavior: smooth;
+            box-sizing: border-box;
+        }
+
+        section::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        section::-webkit-scrollbar-thumb {
+            background: #bbb;
+            border-radius: 10px;
+        }
+
+        img {
+            width: 260px;
+            height: 320px;
+            object-fit: cover;
+            border-radius: 10px;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        img:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <section>
+        <a href="https://www.goodreads.com/book/show/199278823-a-kingdom-of-death-and-despair?ref=nav_sb_ss_2_25"
+            target="_blank">
+            <img src="/static/Books_iframe/book2.jpg" alt="Pinterest Image 2">
+        </a>
+        <a href="https://www.goodreads.com/book/show/64416533-the-herbwitch-princess?from_search=true&from_srp=true&qid=I8Bwf7iLWK&rank=1"
+            target="_blank">
+            <img src="/static/Books_iframe/book6.jpg" alt="Pinterest Image 1">
+        </a>
+        <a href="https://www.goodreads.com/book/show/221192697-twisted-treason?ref=nav_sb_ss_1_15" target="_blank">
+            <img src="/static/Books_iframe/book4.jpg" alt="Pinterest Image 4">
+        </a>
+        <a href="https://www.goodreads.com/book/show/216968765-cursed-by-the-black-heart?ref=nav_sb_ss_1_25"
+            target="_blank">
+            <img src="/static/Books_iframe/book5.jpg" alt="Pinterest Image 5">
+        </a>
+        <a href="https://www.goodreads.com/book/show/199278810-a-kingdom-of-flame-and-fury?from_search=true&from_srp=true&qid=C25n7QK4Tq&rank=1"
+            target="_blank">
+            <img src="/static/Books_iframe/book3.jpg" alt="Pinterest Image 3">
+        </a>
+        <a href="https://www.goodreads.com/book/show/40520077-freedom-in-the-cave?from_search=true&from_srp=true&qid=34yHTbw1Hr&rank=1"
+            target="_blank">
+            <img src="/static/Books_iframe/book7.jpg" alt="Pinterest Image 2">
+        </a>
+        <a href="https://www.goodreads.com/book/show/175738991-of-stars-and-tides" target="_blank">
+            <img src="/static/Books_iframe/book8.jpg" alt="Pinterest Image 3">
+        </a>
+        <a href="https://www.goodreads.com/book/show/71304316-the-curse-of-the-crow" target="_blank">
+            <img src="/static/Books_iframe/book9.jpg" alt="Pinterest Image 4">
+        </a>
+        <a href="https://www.thriftbooks.com/w/the-curse-keepers_denise-grover-swank/3307578/#edition=8004976&idiq=8575859"
+            target="_blank">
+            <img src="/static/Books_iframe/book10.jpg" alt="Pinterest Image 4">
+        </a>
+        <a href="https://www.goodreads.com/book/show/122753147-court-of-darkness?from_search=true&from_srp=true&qid=oQPn56Jlnt&rank=1"
+            target="_blank">
+            <img src="/static/Books_iframe/book1.jpg" alt="Pinterest Image 1">
+        </a>
+    </section>
+        <script src="/static/js/theme.js"></script>
+    </body>
+
+</html>

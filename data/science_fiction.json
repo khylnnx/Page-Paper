@@ -1,0 +1,77 @@
+[
+  {
+    "id": 1,
+    "title": "Dune",
+    "author": "Frank Herbert",
+    "price": 750,
+    "stock": 43,
+    "category": "Science Fiction",
+    "tags": [
+      "Space Opera",
+      "Politics",
+      "Epic"
+    ],
+    "image": "Dune.jpg",
+    "description": "Set on the desert planet Arrakis, Dune follows young Paul Atreides as he navigates political intrigue, betrayal, and destiny. Control of the planet\u00e2\u20ac\u2122s valuable spice could determine the future of the entire galaxy."
+  },
+  {
+    "id": 2,
+    "title": "The Hunger Games",
+    "author": "Suzanne Collins",
+    "price": 680,
+    "stock": 60,
+    "category": "Science Fiction",
+    "tags": [
+      "Dystopian",
+      "Young Adult",
+      "Survival"
+    ],
+    "image": "The Hunger Games.jpg",
+    "description": "In a dystopian future, Katniss Everdeen volunteers to take her sister\u00e2\u20ac\u2122s place in the Hunger Games\u00e2\u20ac\u201da televised fight to the death. Her courage and defiance spark hope in a nation ruled by fear."
+  },
+  {
+    "id": 3,
+    "title": "Ender's Game",
+    "author": "Orson Scott Card",
+    "price": 700,
+    "stock": 35,
+    "category": "Science Fiction",
+    "tags": [
+      "Military Sci-Fi",
+      "Space",
+      "Strategy"
+    ],
+    "image": "Ender's Game.jpg",
+    "description": "Young genius Ender Wiggin is recruited to a military school in space to prepare for an alien invasion. As training intensifies, Ender must confront the moral cost of war and leadership."
+  },
+  {
+    "id": 4,
+    "title": "The Maze Runner",
+    "author": "James Dashner",
+    "price": 650,
+    "stock": 50,
+    "category": "Science Fiction",
+    "tags": [
+      "Dystopian",
+      "Young Adult",
+      "Mystery"
+    ],
+    "image": "The Maze Runner.jpg",
+    "description": "When Thomas wakes up in a mysterious maze with no memory of his past, he must work with other boys to survive. Each day brings new dangers\u00e2\u20ac\u201dand clues about the truth behind their imprisonment."
+  },
+  {
+    "id": 5,
+    "title": "Ready Player One",
+    "author": "Ernest Cline",
+    "price": 720,
+    "stock": 40,
+    "category": "Science Fiction",
+    "tags": [
+      "Virtual Reality",
+      "Adventure",
+      "Dystopian"
+    ],
+    "image": "Ready Player One.jpg",
+    "description": "In a bleak future, people escape reality through the virtual world of the OASIS. When its creator dies, a global competition begins, and teen Wade Watts must outwit rivals to claim unimaginable power and wealth."
+  }
+]

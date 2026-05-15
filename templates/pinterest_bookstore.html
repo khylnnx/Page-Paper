@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizontal Scroll Gallery</title>
+
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow-x: hidden;
+            background-color: #EAE2C6;
+        }
+
+        section {
+            height: 100vh;
+            display: flex;
+            overflow-x: auto;
+            overflow-y: hidden;
+            gap: 8px;
+            padding: 10px 20px;
+            scrollbar-width: thin;
+            scrollbar-color: #bbb #f9f9f9;
+            scroll-behavior: smooth;
+            box-sizing: border-box;
+        }
+
+        /* Scrollable section for images only */
+        section {
+            display: flex;
+            overflow-x: auto;
+            overflow-y: hidden;
+            gap: 8px;
+            padding: 10px;
+            scrollbar-width: thin;
+            scrollbar-color: #bbb #f9f9f9;
+            scroll-behavior: smooth;
+            box-sizing: border-box;
+        }
+
+        section::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        section::-webkit-scrollbar-thumb {
+            background: #bbb;
+            border-radius: 10px;
+        }
+
+        img {
+            width: 260px;
+            height: 320px;
+            object-fit: cover;
+            border-radius: 10px;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        img:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <section>
+        <a href="https://ph.pinterest.com/pin/1548181178411002/" target="_blank">
+            <img src="/static/Bookstore/bookstore1.jpg" alt="Pinterest Image 1">
+        </a>
+        <a href="https://ph.pinterest.com/pin/3377768468212803/" target="_blank">
+            <img src="/static/Bookstore/bookstore2.jpg" alt="Pinterest Image 2">
+        </a>
+        <a href="https://ph.pinterest.com/pin/2392606048300051/" target="_blank">
+            <img src="/static/Bookstore/bookstore3.jpg" alt="Pinterest Image 3">
+        </a>
+        <a href="https://ph.pinterest.com/pin/4855512094774477/" target="_blank">
+            <img src="/static/Bookstore/bookstore4.jpg" alt="Pinterest Image 4">
+        </a>
+        <a href="https://ph.pinterest.com/pin/20125529579725357/" target="_blank">
+            <img src="/static/Bookstore/bookstore5.jpg" alt="Pinterest Image 5">
+        </a>
+        <a href="https://ph.pinterest.com/pin/1548181178411002/" target="_blank">
+            <img src="/static/Bookstore/bookstore1.jpg" alt="Pinterest Image 1">
+        </a>
+        <a href="https://ph.pinterest.com/pin/3377768468212803/" target="_blank">
+            <img src="/static/Bookstore/bookstore2.jpg" alt="Pinterest Image 2">
+        </a>
+        <a href="https://ph.pinterest.com/pin/2392606048300051/" target="_blank">
+            <img src="/static/Bookstore/bookstore3.jpg" alt="Pinterest Image 3">
+        </a>
+        <a href="https://ph.pinterest.com/pin/4855512094774477/" target="_blank">
+            <img src="/static/Bookstore/bookstore4.jpg" alt="Pinterest Image 4">
+        </a>
+        <a href="https://ph.pinterest.com/pin/20125529579725357/" target="_blank">
+            <img src="/static/Bookstore/bookstore5.jpg" alt="Pinterest Image 5">
+        </a>
+    </section>
+</body>
+
+</html>

@@ -1,0 +1,1675 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page & Paper | Where Every Page Begins a Journey</title>
+
+  <style>
+    /* CSS Variables */
+    :root {
+      --background: hsla(42, 33%, 88%, 0.95); 
+      --foreground: hsl(350, 65%, 15%);
+      --card: hsl(40, 35%, 93%);
+      --secondary: hsl(35, 40%, 91%);
+      --muted: hsl(35, 25%, 85%);
+      --border: hsl(35, 30%, 78%);
+      --burgundy: hsl(350, 65%, 15%);
+      --burgundy-light: hsl(350, 45%, 35%);
+      --accent: hsl(0, 50%, 55%);
+      --cream-light: hsl(40, 35%, 93%);
+      --gold: hsl(40, 55%, 65%);
+
+      --shadow-card: 0 4px 20px rgba(61, 12, 17, 0.08);
+      --shadow-card-hover: 0 8px 30px rgba(61, 12, 17, 0.15);
+      --shadow-popup: 0 20px 60px rgba(61, 12, 17, 0.25);
+    }
+
+    /* Reset */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Lora', Georgia, serif;
+      background-color: var(--background);
+      color: var(--foreground);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* Navigation */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: hsla(42, 33%, 88%, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--foreground);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .nav-link {
+      position: relative;
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: hsla(350, 65%, 15%, 0.8);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav-link:hover {
+      color: var(--foreground);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s;
+    }
+
+    /* Expand the Underline on Hover */
+    .nav-link:hover::after {
+      width: 75%;
+      /* Grows to 75% of the link width */
+    }
+
+    .nav-menu-btn {
+      display: flex;
+      padding: 0.5rem;
+      background: transparent;
+      border: none;
+      color: var(--foreground);
+      cursor: pointer;
+    }
+
+    .nav-menu-btn svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .nav-mobile {
+      display: none;
+      padding: 1rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .nav-mobile.active {
+      display: block;
+    }
+
+    .nav-mobile-link {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: rgba(61, 12, 17, 0.8);
+      border-radius: 0.5rem;
+      transition: all 0.3s;
+    }
+
+    .nav-mobile-link:hover {
+      color: var(--foreground);
+      background: rgba(61, 12, 17, 0.05);
+    }
+
+    /* Section Styles */
+    .section {
+      padding: 4rem 0;
+    }
+
+    .section-alt {
+      background: rgba(35, 40%, 91%, 0.5);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-badge {
+      display: inline-block;
+      padding: 0.375rem 1rem;
+      background: var(--secondary);
+      color: var(--sage);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-radius: 9999px;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-size: 1.875rem;
+      font-weight: 700;
+      color: var(--foreground);
+      margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      color: var(--muted-foreground);
+      max-width: 40rem;
+      margin: 0 auto;
+    }
+
+    /* Card Grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    /* Genre Card */
+    .genre-card {
+      position: relative;
+      border-radius: 1rem;
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      box-shadow: var(--shadow-card);
+      transition: all 0.3s ease;
+    }
+
+    .genre-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card-hover);
+    }
+
+    .genre-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .genre-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .genre-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.3) 50%, transparent 100%);
+    }
+
+    .genre-card-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1rem;
+      color: white;
+    }
+
+    .genre-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .genre-card-rating {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+    }
+
+    .rating-bar {
+      flex: 1;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .rating-fill {
+      height: 100%;
+      background: var(--burgundy-light);
+      border-radius: 2px;
+    }
+
+    /* Author Card */
+    .author-card {
+      background: linear-gradient(180deg, var(--cream-light) 0%, #f3e1c1 100%);
+      border-radius: 1rem;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      box-shadow: var(--shadow-card);
+      transition: all 0.3s ease;
+    }
+
+    .author-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card-hover);
+    }
+
+    .author-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 1rem;
+      border: 3px solid var(--accent);
+    }
+
+    .author-card h3 {
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: var(--foreground);
+      margin-bottom: 0.5rem;
+    }
+
+    .author-card-rating {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--muted-foreground);
+    }
+
+    .author-card .rating-bar {
+      width: 60px;
+      background: rgba(61, 12, 17, 0.1);
+    }
+
+    #authors {
+      background-color: #f4efe6;
+      padding: 80px 0;
+    }
+
+
+    /* Book Card */
+    .book-card {
+      background: linear-gradient(180deg, var(--cream-light) 0%, hsl(40, 30%, 91%) 100%);
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      transition: all 0.3s ease;
+    }
+
+    .book-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card-hover);
+    }
+
+    .book-card-img {
+      aspect-ratio: 2/3;
+      overflow: hidden;
+    }
+
+    .book-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .book-card:hover .book-card-img img {
+      transform: scale(1.05);
+    }
+
+    .book-card-content {
+      padding: 1rem;
+    }
+
+    .book-card h3 {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--foreground);
+      margin-bottom: 0.5rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .book-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .book-tag {
+      padding: 0.125rem 0.5rem;
+      background: rgba(61, 12, 17, 0.08);
+      font-size: 0.625rem;
+      border-radius: 9999px;
+      color: var(--foreground);
+    }
+
+    .book-card-rating {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--muted-foreground);
+      margin-bottom: 0.75rem;
+    }
+
+    .book-card .rating-bar {
+      flex: 1;
+      background: rgba(61, 12, 17, 0.1);
+    }
+
+    .book-btn {
+      width: 100%;
+      padding: 0.625rem;
+      background: var(--burgundy);
+      color: var(--cream-light);
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .book-btn:hover {
+      background: var(--burgundy-light);
+      transform: scale(1.02);
+    }
+
+    /* Quotes Section */
+    .quotes-grid {
+      display: grid;
+      gap: 1.5rem;
+      max-width: 56rem;
+      margin: 0 auto;
+    }
+
+    .quote-card {
+      background: linear-gradient(180deg, var(--cream-light) 0%, hsl(40, 30%, 91%) 100%);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      position: relative;
+      box-shadow: var(--shadow-card);
+    }
+
+    .quote-icon {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      width: 32px;
+      height: 32px;
+      color: rgba(180, 98, 78, 0.2);
+    }
+
+    .quote-card blockquote {
+      font-size: 1.125rem;
+      font-style: italic;
+      color: rgba(61, 12, 17, 0.9);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .quote-author {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .quote-line {
+      width: 2.5rem;
+      height: 2px;
+      background: rgba(180, 98, 78, 0.3);
+    }
+
+    .quote-author cite {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-style: normal;
+      color: var(--foreground);
+    }
+
+    .quote-source {
+      font-size: 0.75rem;
+      color: var(--muted-foreground);
+      margin-top: 0.25rem;
+    }
+
+    .thai-tagline {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .thai-tagline p:first-child {
+      font-size: 1.125rem;
+      color: rgba(61, 12, 17, 0.6);
+      margin-bottom: 0.25rem;
+    }
+
+    .thai-tagline p:last-child {
+      font-size: 0.875rem;
+      font-style: italic;
+      color: var(--muted-foreground);
+    }
+
+    /* Footer */
+    .footer {
+      background: linear-gradient(180deg, #7e3434 0%, #3D0C11 100%);
+      color: var(--cream-light);
+    }
+
+    .footer-content {
+      padding: 3rem 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .footer-brand svg {
+      width: 32px;
+      height: 32px;
+      padding-left: 1rem;
+    }
+
+    .footer-text {
+      color: rgba(240, 235, 220, 0.8);
+      margin-bottom: 1.5rem;
+      line-height: 1.7;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 0.75rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(240, 235, 220, 0.1);
+      border-radius: 50%;
+      transition: background 0.3s;
+    }
+
+    .social-link:hover {
+      background: rgba(240, 235, 220, 0.2);
+    }
+
+    .social-link svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .newsletter-box {
+      background: rgba(240, 235, 220, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 1rem;
+      padding: 1.5rem;
+    }
+
+    .newsletter-box h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .newsletter-box p {
+      font-size: 0.875rem;
+      color: rgba(240, 235, 220, 0.7);
+      margin-bottom: 1rem;
+    }
+
+    .newsletter-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .newsletter-input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: rgba(240, 235, 220, 0.1);
+      border: 1px solid rgba(240, 235, 220, 0.2);
+      border-radius: 0.5rem;
+      color: var(--cream-light);
+      font-family: inherit;
+      font-size: 0.875rem;
+    }
+
+    .newsletter-input::placeholder {
+      color: rgba(240, 235, 220, 0.5);
+    }
+
+    .newsletter-input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .newsletter-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem;
+      background: var(--accent);
+      color: var(--cream-light);
+      border: none;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .newsletter-btn:hover {
+      opacity: 0.9;
+    }
+
+    .newsletter-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(240, 235, 220, 0.1);
+      padding: 1rem 0;
+    }
+
+    .footer-bottom-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.875rem;
+      color: rgba(240, 235, 220, 0.6);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-links a {
+      color: rgba(240, 235, 220, 0.6);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--cream-light);
+    }
+
+    /* Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(6px);
+      z-index: 100;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .modal {
+      background: var(--background);
+      border-radius: 1rem;
+      max-width: 32rem;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-popup);
+      animation: modalIn 0.3s ease;
+    }
+
+    @keyframes modalIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-header h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--foreground);
+    }
+
+    .modal-close {
+      display: flex;
+      padding: 0.5rem;
+      background: transparent;
+      border: none;
+      color: var(--muted-foreground);
+      border-radius: 0.5rem;
+      transition: all 0.3s;
+    }
+
+    .modal-close:hover {
+      background: rgba(61, 12, 17, 0.1);
+      color: var(--foreground);
+    }
+
+    .modal-close svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .modal-body {
+      padding: 1.5rem;
+    }
+
+    .modal-description {
+      color: var(--foreground);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      font-size: 0.875rem;
+    }
+
+    .modal-info-item {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .modal-info-label {
+      font-weight: 600;
+      color: var(--foreground);
+    }
+
+    .modal-info-value {
+      color: var(--muted-foreground);
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .hero-img {
+      width: 100%;
+      height: 10rem;
+      object-fit: cover;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+
+    /* Responsive */
+    @media (min-width: 640px) {
+      .card-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .quotes-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 768px) {
+      .nav-links {
+        display: flex;
+      }
+
+      .nav-menu-btn {
+        display: none;
+      }
+
+      .hero-img {
+        height: 13rem;
+      }
+
+      .hero-description {
+        font-size: 1rem;
+      }
+
+      .section {
+        padding: 6rem 0;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+      }
+
+      .card-grid {
+        gap: 1.5rem;
+      }
+
+      .genre-card h3 {
+        font-size: 1.125rem;
+      }
+
+      .author-img {
+        width: 100px;
+        height: 100px;
+      }
+
+      .quote-card {
+        padding: 2rem;
+      }
+
+      .quote-card blockquote {
+        font-size: 1.25rem;
+      }
+
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3rem;
+        align-items: center;
+      }
+
+      .footer-bottom-inner {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .card-grid {
+        grid-template-columns: repeat(5, 1fr);
+      }
+
+      .hero-img {
+        height: 15rem;
+      }
+
+      s .section-title {
+        font-size: 3rem;
+      }
+    }
+
+    /* ==================== TOAST ==================== */
+    .toast-container {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      pointer-events: none;
+    }
+
+    @media (min-width: 640px) {
+      .toast-container {
+        bottom: 1.5rem;
+        right: 1.5rem;
+      }
+    }
+
+    .toast {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      min-width: 280px;
+      max-width: 400px;
+      padding: 1rem 1.25rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-hover);
+      pointer-events: auto;
+      animation: toast-slide-in 0.3s ease-out;
+    }
+
+    .toast.toast-hiding {
+      animation: toast-slide-out 0.2s ease-in forwards;
+    }
+
+    .toast-success {
+      border-left: 4px solid hsl(142, 70%, 45%);
+    }
+
+    .toast-error {
+      border-left: 4px solid var(--accent);
+    }
+
+    .toast-info {
+      border-left: 4px solid hsl(210, 70%, 50%);
+    }
+
+    .toast-warning {
+      border-left: 4px solid hsl(45, 90%, 50%);
+    }
+
+    .toast-icon {
+      flex-shrink: 0;
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    .toast-success .toast-icon {
+      color: hsl(142, 70%, 45%);
+    }
+
+    .toast-error .toast-icon {
+      color: var(--accent);
+    }
+
+    .toast-info .toast-icon {
+      color: hsl(210, 70%, 50%);
+    }
+
+    .toast-warning .toast-icon {
+      color: hsl(45, 90%, 50%);
+    }
+
+    .toast-content {
+      flex: 1;
+    }
+
+    .toast-title {
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: var(--foreground);
+      margin-bottom: 0.125rem;
+    }
+
+    .toast-message {
+      font-size: 0.8125rem;
+      color: var(--muted-foreground);
+    }
+
+    .toast-close {
+      flex-shrink: 0;
+      background: none;
+      border: none;
+      padding: 0.25rem;
+      cursor: pointer;
+      color: var(--muted-foreground);
+      opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+
+    .toast-close:hover {
+      opacity: 1;
+    }
+
+    @keyframes toast-slide-in {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes toast-slide-out {
+      from {
+        transform: translateX(0);
+        opacity: 1;
+      }
+
+      to {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+    }
+
+    .btn-full {
+      width: 100%;
+    }
+
+    .btn-center {
+      display: flex;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="/" class="nav-logo">
+          <span>Page & Paper</span>
+        </a>
+
+        <div class="nav-links">
+          <a href="/about-us" class="nav-link">About Us</a>
+          <a href="/owner-founder" class="nav-link">Owner/Founder</a>
+          <a href="/dashboard" class="nav-link">Reader Dashboard</a>
+        </div>
+
+        <button class="nav-menu-btn" onclick="toggleMenu()" aria-label="Toggle menu">
+          <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+          <svg id="close-icon" style="display:none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="nav-mobile" id="mobile-menu">
+        <a href="/about-us" class="nav-mobile-link">About Us</a>
+        <a href="/owner-founder" class="nav-mobile-link">Owner/Founder</a>
+        <a href="/dashboard" class="nav-mobile-link">Reader Dashboard</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Banner -->
+  <header class="hero">
+    <img src="/static/banners/Head Banner.png" alt="Page & Paper Bookstore" class="hero-img">
+  </header>
+
+  <!-- IFrame -->
+  <iframe src="/books_iframe" style="width:100%; height:340px; border:none; display:block;">
+  </iframe>
+
+  <!-- Top skip link -->
+  <p style="text-align:right;">
+    <a href="#newsletter" style="color:#BC7C7C; text-decoration:none; font-weight:bold;">
+      Skip to Page Foot
+    </a>
+  </p>
+  
+  <!-- Genres Section -->
+  <section id="genres" class="section">
+    <div class="container">
+      <header class="section-header">
+        <span class="section-badge">Explore</span>
+        <h2 class="section-title">Popular Book Genres</h2>
+        <p class="section-subtitle">Discover stories across every genre imaginable. Find your next adventure, romance,
+          or mystery.</p>
+      </header>
+
+      <div class="card-grid">
+        <div class="genre-card">
+          <a href="/romance">
+            <figure>
+              <img src="/static/books/romance.jpg" alt="Romance" width="130" height="180">
+              <div class="genre-card-overlay"></div>
+              <div class="genre-card-content">
+                <h3>Romance</h3>
+                <div class="genre-card-rating">
+                  <div class="rating-bar">
+                    <div class="rating-fill" style="width:90%"></div>
+                  </div>
+                  <span>90%</span>
+                </div>
+              </div>
+            </figure>
+          </a>
+        </div>
+
+        <div class="genre-card">
+          <a href="/fantasy">
+            <figure>
+              <img src="/static/books/fantasy.jpg" alt="Fantasy" width="130" height="180">
+              <div class="genre-card-overlay"></div>
+              <div class="genre-card-content">
+                <h3>Fantasy</h3>
+                <div class="genre-card-rating">
+                  <div class="rating-bar">
+                    <div class="rating-fill" style="width:85%"></div>
+                  </div>
+                  <span>85%</span>
+                </div>
+              </div>
+            </figure>
+          </a>
+        </div>
+
+        <div class="genre-card">
+          <a href="/science-fiction">
+            <figure>
+              <img src="/static/books/science fiction.jpg" alt="Science Fiction" width="130" height="180">
+              <div class="genre-card-overlay"></div>
+              <div class="genre-card-content">
+                <h3>Science Fiction</h3>
+                <div class="genre-card-rating">
+                  <div class="rating-bar">
+                    <div class="rating-fill" style="width:75%"></div>
+                  </div>
+                  <span>75%</span>
+                </div>
+              </div>
+            </figure>
+          </a>
+        </div>
+
+        <div class="genre-card">
+          <a href="/mystery">
+            <figure>
+              <img src="/static/books/mystery_thriller.jpg" alt="Mystery / Thriller" width="130" height="180">
+              <div class="genre-card-overlay"></div>
+              <div class="genre-card-content">
+                <h3>Mystery / Thriller</h3>
+                <div class="genre-card-rating">
+                  <div class="rating-bar">
+                    <div class="rating-fill" style="width:85%"></div>
+                  </div>
+                  <span>85%</span>
+                </div>
+              </div>
+            </figure>
+          </a>
+        </div>
+
+        <div class="genre-card">
+          <a href="/poetry">
+            <figure>
+              <img src="/static/books/poetry.jpg" alt="Poetry" width="130" height="180">
+              <div class="genre-card-overlay"></div>
+              <div class="genre-card-content">
+                <h3>Poetry</h3>
+                <div class="genre-card-rating">
+                  <div class="rating-bar">
+                    <div class="rating-fill" style="width:83%"></div>
+                  </div>
+                  <span>83%</span>
+                </div>
+              </div>
+            </figure>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Authors Section -->
+  <section id="authors" class="section section-alt">
+    <div class="container">
+      <header class="section-header">
+        <span class="section-badge">Meet the Minds</span>
+        <h2 class="section-title">Best Selling Authors</h2>
+        <p class="section-subtitle">Explore works from literary legends who have shaped the world of storytelling.</p>
+      </header>
+
+      <div class="card-grid">
+        <a href="https://www.jkrowling.com/" target="_blank" class="author-card">
+          <img src="/static/authors/J.K. Rowling.png" alt="J.K. Rowling" class="author-img">
+          <h3>J.K. Rowling</h3>
+          <div class="author-card-rating">
+            <div class="rating-bar">
+              <div class="rating-fill" style="width:95%"></div>
+            </div>
+            <span>95%</span>
+          </div>
+        </a>
+
+        <a href="https://www.tolkiensociety.org/" target="_blank" class="author-card">
+          <img src="/static/authors/J.R.R. Tolkien.jpg" alt="J.R.R. Tolkien" class="author-img">
+          <h3>J.R.R. Tolkien</h3>
+          <div class="author-card-rating">
+            <div class="rating-bar">
+              <div class="rating-fill" style="width:92%"></div>
+            </div>
+            <span>92%</span>
+          </div>
+        </a>
+
+        <a href="https://jonaxxstories.com/" target="_blank" class="author-card">
+          <img src="/static/authors/Jonaxx.jpg" alt="Jonaxx" class="author-img">
+          <h3>Jonaxx</h3>
+          <div class="author-card-rating">
+            <div class="rating-bar">
+              <div class="rating-fill" style="width:88%"></div>
+            </div>
+            <span>88%</span>
+          </div>
+        </a>
+
+        <a href="https://harukimurakami.com/" target="_blank" class="author-card">
+          <img src="/static/authors/Haruki Murakami.jpg" alt="Haruki Murakami" class="author-img">
+          <h3>Haruki Murakami</h3>
+          <div class="author-card-rating">
+            <div class="rating-bar">
+              <div class="rating-fill" style="width:89%"></div>
+            </div>
+            <span>89%</span>
+          </div>
+        </a>
+
+        <a href="#" class="author-card">
+          <img src="/static/authors/Maya Angelou.jpg" alt="Maya Angelou" class="author-img">
+          <h3>Maya Angelou</h3>
+          <div class="author-card-rating">
+            <div class="rating-bar">
+              <div class="rating-fill" style="width:90%"></div>
+            </div>
+            <span>90%</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Books Section -->
+  <section id="choices" class="section">
+    <div class="container">
+      <header class="section-header">
+        <span class="section-badge">Curated Selection</span>
+        <h2 class="section-title">Page & Paper Choices</h2>
+        <p class="section-subtitle">Hand-picked stories that have captured the hearts of readers worldwide.</p>
+      </header>
+
+      <div class="card-grid">
+        <div class="book-card">
+          <div class="book-card-img">
+            <img src="/static/book_choices/Class Zero.jpg" alt="Class Zero">
+          </div>
+          <div class="book-card-content">
+            <h3>Class Zero</h3>
+            <div class="book-card-tags">
+              <span class="book-tag">Mystery</span>
+              <span class="book-tag">School Life</span>
+            </div>
+            <div class="book-card-rating">
+              <div class="rating-bar">
+                <div class="rating-fill" style="width:95%"></div>
+              </div>
+              <span>95%</span>
+            </div>
+            <button class="book-btn"
+              onclick="openModal('Class Zero', 'Isa ang Merton Academy sa mga kilalang paaralan sa buong Pilipinas. Karamihan sa mga nag-aaral dito ay mga kabataang may talento pagdating sa akademiko at mga laro. Ngunit may isang klase sa loob ng Merton Academy ang tinitingala ng lahat ng estudyante at iyon ang Class Zero.', 'Mystery, School Life, Supernatural', 'May 27, 2020 - December 31, 2020', '95%')">View
+              Details</button>
+          </div>
+        </div>
+
+        <div class="book-card">
+          <div class="book-card-img">
+            <img src="/static/book_choices/Hell U.jpg" alt="Hell University">
+          </div>
+          <div class="book-card-content">
+            <h3>Hell University</h3>
+            <div class="book-card-tags">
+              <span class="book-tag">Horror</span>
+              <span class="book-tag">Dark Fantasy</span>
+            </div>
+            <div class="book-card-rating">
+              <div class="rating-bar">
+                <div class="rating-fill" style="width:90%"></div>
+              </div>
+              <span>90%</span>
+            </div>
+            <button class="book-btn"
+              onclick="openModal('Hell University', 'A place where everything is mysterious, enchanting, bloody, and shitty. Entering is the other way of suicidal. Just one wrong move and everything will blur. Once you enter, there is no turning back.', 'Horror, Dark Fantasy, School Life', 'February 8, 2016 - August 17, 2016', '90%')">View
+              Details</button>
+          </div>
+        </div>
+
+        <div class="book-card">
+          <div class="book-card-img">
+            <img src="/static/book_choices/Over the Horizon.jpg" alt="Over the Horizon">
+          </div>
+          <div class="book-card-content">
+            <h3>Over the Horizon</h3>
+            <div class="book-card-tags">
+              <span class="book-tag">Adventure</span>
+              <span class="book-tag">Drama</span>
+            </div>
+            <div class="book-card-rating">
+              <div class="rating-bar">
+                <div class="rating-fill" style="width:85%"></div>
+              </div>
+              <span>85%</span>
+            </div>
+            <button class="book-btn"
+              onclick="openModal('Over the Horizon', 'A story of courage and discovery beyond the limits of the known world. Follow the journey of those brave enough to seek what lies beyond.', 'Adventure, Exploration, Drama', 'October 2, 2023 - February 18, 2024', '85%')">View
+              Details</button>
+          </div>
+        </div>
+
+        <div class="book-card">
+          <div class="book-card-img">
+            <img src="/static/book_choices/Mageia High.jpg" alt="Mageía High">
+          </div>
+          <div class="book-card-content">
+            <h3>Mageía High</h3>
+            <div class="book-card-tags">
+              <span class="book-tag">Fantasy</span>
+              <span class="book-tag">Magic</span>
+            </div>
+            <div class="book-card-rating">
+              <div class="rating-bar">
+                <div class="rating-fill" style="width:80%"></div>
+              </div>
+              <span>80%</span>
+            </div>
+            <button class="book-btn"
+              onclick="openModal('Mageía High: Grimoire of Astria', 'A world where magic is everything. A world where anything is possible. A world where any creature exists. And a single Grimoire can destroy it.', 'Fantasy, Magic, Coming of Age', 'August 27, 2020 - October 24, 2020', '80%')">View
+              Details</button>
+          </div>
+        </div>
+
+        <div class="book-card">
+          <div class="book-card-img">
+            <img src="/static/book_choices/Dosage of Serotonin.jpg" alt="Dosage of Serotonin">
+          </div>
+          <div class="book-card-content">
+            <h3>Dosage of Serotonin</h3>
+            <div class="book-card-tags">
+              <span class="book-tag">Romance</span>
+              <span class="book-tag">Drama</span>
+            </div>
+            <div class="book-card-rating">
+              <div class="rating-bar">
+                <div class="rating-fill" style="width:75%"></div>
+              </div>
+              <span>75%</span>
+            </div>
+            <button class="book-btn"
+              onclick="openModal('Dosage of Serotonin', 'Ang hirap palang tumanda. Ang hirap magbayad ng bills. Nang dumating sa buhay ko ang nag-iisang lalaking hindi ako nakita bilang naglalakad na alkansya, ipinangako ko sa sarili na magtitiis ako basta siya ang kasama.', 'Romance, Slice of Life, Drama', 'April 27, 2021 - August 24, 2021', '75%')">View
+              Details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quotes Section -->
+  <section class="section section-alt">
+    <div class="container">
+      <header class="section-header">
+        <span class="section-badge">Words of Wisdom</span>
+        <h2 class="section-title">Literary Quotes</h2>
+      </header>
+
+      <div class="quotes-grid">
+        <div class="quote-card">
+          <svg class="quote-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21c0 1 0 1 1 1z">
+            </path>
+            <path
+              d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z">
+            </path>
+          </svg>
+          <blockquote>"The wide world is all about you: you can fence yourselves in, but you cannot forever fence it
+            out."</blockquote>
+          <footer class="quote-author">
+            <div class="quote-line"></div>
+            <div>
+              <cite>J.R.R. Tolkien</cite>
+            </div>
+          </footer>
+        </div>
+
+        <div class="quote-card">
+          <svg class="quote-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21c0 1 0 1 1 1z">
+            </path>
+            <path
+              d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z">
+            </path>
+          </svg>
+          <blockquote>"How does someone find it easy to live life smiling after having hurt the soul of someone who only
+            offered them love?"</blockquote>
+          <footer class="quote-author">
+            <div class="quote-line"></div>
+            <div>
+              <cite>Pierre Alex Jeanty</cite>
+              <p class="quote-source">Apologies That Never Came</p>
+            </div>
+          </footer>
+        </div>
+      </div>
+
+      <div class="thai-tagline">
+        <p>ที่ทุกหน้าเริ่มต้นการเดินทาง</p>
+        <p>"Where Every Page Begins a Journey"</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="newsletter" class="footer">
+    <div class="footer-content container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+            <span>Page & Paper</span>
+          </div>
+          <p class="footer-text">Join our community of book lovers and receive curated recommendations, exclusive
+            content, and the latest literary updates.</p>
+
+          <div class="social-links">
+            <a href="https://facebook.com" target="_blank" class="social-link" aria-label="Facebook">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+              </svg>
+            </a>
+            <a href="https://instagram.com" target="_blank" class="social-link" aria-label="Instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+            <a href="https://twitter.com" target="_blank" class="social-link" aria-label="Twitter">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+                </path>
+              </svg>
+            </a>
+            <a href="mailto:pageandpaper@email.com" class="social-link" aria-label="Email">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="newsletter-box">
+          <h3>Subscribe to Our Newsletter</h3>
+          <p>Get the latest book releases and recommendations delivered to your inbox.</p>
+          <form class="newsletter-form" id="newsletter-form">
+            <input type="email" class="newsletter-input" placeholder="Enter your email" required>
+            <button type="submit" class="newsletter-btn">
+              <svg>...</svg>
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>© 2024 Page & Paper. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Book Modal -->
+  <div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+    <div class="modal" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h2 id="modal-title">Book Title</h2>
+        <button class="modal-close" onclick="closeModal()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-description" id="modal-desc"></p>
+        <div class="modal-info">
+          <div class="modal-info-item">
+            <span class="modal-info-label">🏷️ Tags:</span>
+            <span class="modal-info-value" id="modal-tags"></span>
+          </div>
+          <div class="modal-info-item">
+            <span class="modal-info-label">📅 Published:</span>
+            <span class="modal-info-value" id="modal-published"></span>
+          </div>
+          <div class="modal-info-item">
+            <span class="modal-info-label">⭐ Rating:</span>
+            <span class="modal-info-value" id="modal-rating"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ==================== TOAST SYSTEM ====================
+    function showToast(type, title, message, duration = 4000) {
+      const container = document.getElementById('toast-container');
+
+      const icons = {
+        success: '<svg class="toast-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>',
+        error: '<svg class="toast-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" stroke-width="2" d="M15 9l-6 6M9 9l6 6"/></svg>',
+        info: '<svg class="toast-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" stroke-width="2" d="M12 16v-4M12 8h.01"/></svg>',
+        warning: '<svg class="toast-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>'
+      };
+
+      const toast = document.createElement('div');
+      toast.className = 'toast toast-' + type;
+      toast.innerHTML = `
+                ${icons[type] || icons.info}
+                <div class="toast-content">
+                    <div class="toast-title">${title}</div>
+                    ${message ? '<div class="toast-message">' + message + '</div>' : ''}
+                </div>
+                <button class="toast-close" onclick="closeToast(this.parentElement)">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            `;
+
+      container.appendChild(toast);
+
+      if (duration > 0) {
+        setTimeout(() => closeToast(toast), duration);
+      }
+
+      return toast;
+    }
+
+    function closeToast(toast) {
+      if (!toast || toast.classList.contains('toast-hiding')) return;
+      toast.classList.add('toast-hiding');
+      setTimeout(() => toast.remove(), 200);
+    }
+
+    // Mobile Menu Toggle
+    function toggleMenu() {
+      const mobileMenu = document.getElementById('mobile-menu');
+      const menuIcon = document.getElementById('menu-icon');
+      const closeIcon = document.getElementById('close-icon');
+
+      mobileMenu.classList.toggle('active');
+
+      if (mobileMenu.classList.contains('active')) {
+        menuIcon.style.display = 'none';
+        closeIcon.style.display = 'block';
+      } else {
+        menuIcon.style.display = 'block';
+        closeIcon.style.display = 'none';
+      }
+    }
+    function closeMenu() {
+      const mobileMenu = document.getElementById('mobile-menu');
+      const menuIcon = document.getElementById('menu-icon');
+      const closeIcon = document.getElementById('close-icon');
+
+      mobileMenu.classList.remove('active');
+      menuIcon.style.display = 'block';
+      closeIcon.style.display = 'none';
+    }
+
+    // Modal Functions
+    function openModal(title, desc, tags, published, rating) {
+      document.getElementById('modal-title').textContent = title;
+      document.getElementById('modal-desc').textContent = desc;
+      document.getElementById('modal-tags').textContent = tags;
+      document.getElementById('modal-published').textContent = published;
+      document.getElementById('modal-rating').textContent = rating;
+      document.getElementById('modal-overlay').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(event) {
+      if (!event || event.target === document.getElementById('modal-overlay')) {
+        document.getElementById('modal-overlay').classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    // Newsletter Submit
+    document.getElementById('newsletter-form').addEventListener('submit', async function (event) {
+      event.preventDefault();  // Prevents default form submission
+      console.log('Form submitted');
+      const email = event.target.querySelector('.newsletter-input').value;
+      console.log('Email:', email);
+      if (!email) {
+        showToast('warning', 'Email Required', 'Please enter your email address to subscribe.');
+        return;
+      }
+      try {
+        console.log('Sending request to /subscribe');
+        const response = await fetch('/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+        console.log('Response status:', response.status);
+        const result = await response.json();
+        console.log('Response message:', result.message);
+        if (response.ok) {
+          showToast('success', 'Subscribed!', 'Thank you for subscribing to our newsletter.');
+          event.target.reset();
+        } else {
+          showToast('error', 'Subscription Failed', result.message || 'Please try again later.');
+        }
+      } catch (error) {
+        console.error('Fetch error:', error);
+        showToast('error', 'Connection Error', 'Unable to connect to the server. Please check your internet connection and try again.');
+      }
+    });
+
+  </script>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="toast-container"></div>
+  <script src="/static/js/theme.js"></script>
+</body>
+
+</html>

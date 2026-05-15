@@ -1,0 +1,2471 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mystery/Thriller Books | Page & Paper</title>
+    <meta name="author" content="Page & Paper">
+    <meta name="theme-color" content="#3D0C11">
+
+    <!-- Google Fonts - Lora -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* CSS Reset & Base */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --background: hsl(42, 33%, 91%);
+            --foreground: hsl(354, 60%, 15%);
+            --card: hsl(42, 40%, 95%);
+            --card-foreground: hsl(354, 60%, 15%);
+            --primary: hsl(354, 60%, 15%);
+            --primary-foreground: hsl(42, 67%, 78%);
+            --secondary: hsl(0, 29%, 46%);
+            --secondary-foreground: hsl(0, 0%, 100%);
+            --muted: hsl(32, 45%, 85%);
+            --muted-foreground: hsl(25, 28%, 35%);
+            --accent: hsl(0, 50%, 55%);
+            --accent-foreground: hsl(0, 0%, 100%);
+            --border: hsl(0, 35%, 62%);
+            --rose: hsl(0, 35%, 62%);
+            --rose-light: hsl(0, 35%, 80%);
+            --rose-dark: hsl(0, 29%, 46%);
+            --golden: hsl(32, 67%, 74%);
+            --golden-accent: hsl(25, 52%, 50%);
+            --radius: 0.75rem;
+            --shadow-soft: 0 4px 20px hsla(354, 60%, 15%, 0.15);
+            --shadow-medium: 0 8px 30px hsla(354, 60%, 15%, 0.22);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: 'Lora', Georgia, serif;
+            background-color: var(--background);
+            color: var(--foreground);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            outline: none;
+        }
+
+        select {
+            font-family: inherit;
+        }
+
+        /* Container */
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Navigation */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: hsla(42, 33%, 88%, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--foreground);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: none;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .nav-link {
+            position: relative;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: hsla(350, 65%, 15%, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--foreground);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 75%;
+        }
+
+        .nav-menu-btn {
+            display: flex;
+            padding: 0.75rem;
+            background: transparent;
+            border: none;
+            color: var(--foreground);
+            cursor: pointer;
+            min-width: 44px;
+            min-height: 44px;
+        }
+
+        .nav-menu-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .nav-mobile {
+            display: none;
+            padding: 1rem 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .nav-mobile.active {
+            display: block;
+        }
+
+        .nav-mobile-link {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: rgba(61, 12, 17, 0.8);
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .nav-mobile-link:hover {
+            color: var(--foreground);
+            background: rgba(61, 12, 17, 0.05);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 10rem;
+            object-fit: cover;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-stats {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--foreground);
+        }
+
+        .hero-stat-label {
+            font-size: 0.875rem;
+            color: var(--muted-foreground);
+        }
+
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+
+            .nav-menu-btn {
+                display: none;
+            }
+
+            .hero-img {
+                height: 13rem;
+            }
+
+            .hero-title {
+                font-size: 3.75rem;
+            }
+
+            .hero-stat-value {
+                font-size: 1.875rem;
+            }
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+            min-height: 44px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), hsla(354, 60%, 15%, 0.8));
+            color: var(--primary-foreground);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-outline:hover {
+            background: var(--accent);
+            color: var(--accent-foreground);
+            transform: translateY(-2px);
+        }
+
+        .btn-buy {
+            flex: 1;
+            background: var(--primary);
+            color: var(--primary-foreground);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .btn-buy:hover {
+            background: hsla(354, 60%, 20%, 1);
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .btn-view {
+            flex: 1;
+            background: var(--secondary);
+            color: var(--secondary-foreground);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .btn-view:hover {
+            background: var(--rose-dark);
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        /* Book Grid */
+        .book-grid-section {
+            padding: 1.5rem 0;
+        }
+
+        .book-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .book-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .book-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+            }
+        }
+
+        /* Book Card */
+        .book-card {
+            background: var(--card);
+            border-radius: 1rem;
+            border: 4px solid var(--muted);
+            padding: 1rem 1.25rem;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s;
+        }
+
+        .book-card:hover {
+            box-shadow: var(--shadow-medium);
+        }
+
+        .book-cover {
+            position: relative;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            border-radius: 0.75rem;
+        }
+
+        .book-cover-inner {
+            aspect-ratio: 2/3;
+            background: var(--muted);
+        }
+
+        .book-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .book-card:hover .book-cover img {
+            transform: scale(1.05);
+        }
+
+        .book-badge {
+            position: absolute;
+            top: 0.5rem;
+            left: 0.5rem;
+            padding: 0.25rem 0.5rem;
+            background: var(--accent);
+            color: var(--accent-foreground);
+            font-size: 0.75rem;
+            font-weight: 700;
+            border-radius: 0.375rem;
+        }
+
+        .book-info {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .book-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--foreground);
+            line-height: 1.3;
+            margin-bottom: 0.25rem;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            min-height: 2.6rem;
+        }
+
+        .book-author {
+            font-size: 0.875rem;
+            color: var(--muted-foreground);
+        }
+
+        .book-divider {
+            border: none;
+            border-top: 2px solid hsla(354, 60%, 15%, 0.2);
+            width: 80%;
+            margin: 1rem auto;
+        }
+
+        .book-qty-label {
+            text-align: center;
+            font-size: 0.875rem;
+            color: var(--muted-foreground);
+            margin-bottom: 0.75rem;
+        }
+
+        .book-qty-selector {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .book-qty-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 0.5rem;
+            background: var(--muted);
+            color: var(--foreground);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .book-qty-btn:hover:not(:disabled) {
+            background: var(--secondary);
+            color: var(--secondary-foreground);
+        }
+
+        .book-qty-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .book-qty-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .book-qty-value {
+            width: 48px;
+            text-align: center;
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--foreground);
+        }
+
+        .book-total {
+            text-align: center;
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--foreground);
+            margin-bottom: 1rem;
+        }
+
+        .book-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .book-title {
+                font-size: 1.125rem;
+            }
+        }
+
+        /* Modals */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: hsla(354, 60%, 15%, 0.4);
+            backdrop-filter: blur(6px);
+            z-index: 100;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            background: var(--background);
+            border-radius: 1rem;
+            box-shadow: var(--shadow-medium);
+            z-index: 101;
+            width: calc(100% - 2rem);
+            max-width: 28rem;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 1.5rem;
+            display: none;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+
+        .modal.active {
+            display: block;
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--muted);
+            color: var(--foreground);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .modal-close:hover {
+            background: var(--secondary);
+            color: var(--secondary-foreground);
+        }
+
+        .modal-close svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--foreground);
+            text-align: center;
+            margin-bottom: 1rem;
+            padding-right: 2rem;
+        }
+
+        .modal-desc {
+            color: var(--muted-foreground);
+            text-align: center;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-divider {
+            border: none;
+            border-top: 2px solid hsla(354, 60%, 15%, 0.2);
+            width: 80%;
+            margin: 1.5rem auto;
+        }
+
+        .modal-detail {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: var(--card);
+            border-radius: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .modal-detail svg {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .modal-detail-label {
+            font-weight: 600;
+            color: var(--foreground);
+        }
+
+        .modal-detail-value {
+            color: var(--muted-foreground);
+        }
+
+        .modal-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .modal-tag {
+            padding: 0.25rem 0.5rem;
+            background: hsla(0, 29%, 46%, 0.2);
+            color: var(--secondary);
+            font-size: 0.875rem;
+            border-radius: 0.375rem;
+        }
+
+        .modal-btn {
+            width: 100%;
+            margin-top: 1.5rem;
+        }
+
+        /* Checkout Modal */
+        .checkout-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--muted);
+            margin-bottom: 1rem;
+        }
+
+        .checkout-header h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--foreground);
+        }
+
+        .order-summary {
+            background: var(--card);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            border: 1px solid var(--muted);
+            margin-bottom: 1.25rem;
+        }
+
+        .order-summary h3 {
+            font-weight: 600;
+            color: var(--foreground);
+            margin-bottom: 0.75rem;
+        }
+
+        .order-item {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .order-item img {
+            width: 80px;
+            height: 110px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .order-item-details {
+            flex: 1;
+        }
+
+        .order-item-title {
+            font-weight: 600;
+            color: var(--foreground);
+            margin-bottom: 0.25rem;
+        }
+
+        .order-item-author,
+        .order-item-qty {
+            font-size: 0.875rem;
+            color: var(--muted-foreground);
+        }
+
+        .order-item-price {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-top: 0.5rem;
+        }
+
+        .payment-section h3 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--foreground);
+            margin-bottom: 0.75rem;
+        }
+
+        .payment-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            border: 2px solid var(--muted);
+            background: var(--card);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .payment-option:hover {
+            border-color: var(--rose);
+            background: hsla(0, 0%, 100%, 0.5);
+        }
+
+        .payment-option.selected {
+            border-color: var(--primary);
+            background: hsla(0, 29%, 46%, 0.1);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .payment-radio {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid var(--rose);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .payment-option.selected .payment-radio {
+            background: var(--secondary);
+            border-color: var(--secondary);
+        }
+
+        .payment-option.selected .payment-radio::after {
+            content: '✓';
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .payment-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 0.5rem;
+            background: var(--muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+
+        .payment-option.selected .payment-icon {
+            background: var(--secondary);
+        }
+
+        .payment-info {
+            flex: 1;
+            text-align: left;
+        }
+
+        .payment-name {
+            font-weight: 600;
+            color: var(--foreground);
+        }
+
+        .payment-desc {
+            font-size: 0.875rem;
+            color: var(--muted-foreground);
+        }
+
+        .price-breakdown {
+            background: hsla(25, 52%, 50%, 0.1);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin: 1.25rem 0;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            color: var(--muted-foreground);
+            margin-bottom: 0.5rem;
+        }
+
+        .price-row.total {
+            border-top: 2px solid var(--muted);
+            padding-top: 0.75rem;
+            margin-top: 0.75rem;
+            margin-bottom: 0;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--foreground);
+        }
+
+        .terms-text {
+            text-align: center;
+            font-size: 0.875rem;
+            color: var(--muted-foreground);
+            margin-top: 1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(180deg, #7e3434 0%, #3D0C11 100%);
+            color: rgba(240, 235, 220, 0.8);
+            position: relative;
+        }
+
+        .footer-content {
+            padding: 3rem 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .footer-brand svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .footer-text {
+            color: rgba(240, 235, 220, 0.8);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.75rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(240, 235, 220, 0.1);
+            border-radius: 50%;
+            transition: background 0.3s;
+            color: var(--cream-light);
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: rgba(240, 235, 220, 0.2);
+        }
+
+        .social-link svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 3rem;
+            }
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(240, 235, 220, 0.1);
+            padding: 1rem 0;
+        }
+
+        .footer-bottom-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.875rem;
+            color: rgba(240, 235, 220, 0.6);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+            color: var(--cream-light);
+            text-decoration: none;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: rgba(240, 235, 220, 0.6);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--cream-light);
+        }
+
+        .footer-rating {
+            text-align: right;
+        }
+
+        .footer-rating h4 {
+            font-weight: 600;
+            color: var(--foreground);
+            margin-bottom: 1rem;
+        }
+
+        .footer-rating-box {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: right;
+            gap: 0.75rem;
+            background: var(--card);
+            padding: 1rem;
+            border-radius: 0.75rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .footer-rate-btn {
+            display: flex;
+            align-items: right;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--secondary);
+            color: var(--secondary-foreground);
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .footer-rate-btn:hover {
+            background: var(--rose-dark);
+        }
+
+        .footer-rate-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .footer-stars {
+            display: flex;
+            gap: 0.25rem;
+            margin-left: 0.5rem;
+            color: var(--golden);
+        }
+
+        .footer-clear-btn {
+            font-size: 0.875rem;
+            color: var(--muted-foreground);
+            background: none;
+            transition: color 0.2s;
+        }
+
+        .footer-clear-btn:hover {
+            color: var(--secondary);
+        }
+
+        @media (min-width: 1280px) {
+            .footer-content {
+                padding: 3rem 0;
+            }
+        }
+
+        /* Rating Box */
+        .rating-box {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            background: var(--card);
+            border-radius: 1rem;
+            box-shadow: var(--shadow-medium);
+            padding: 1rem;
+            width: 250px;
+            color: var(--foreground);
+            z-index: 10;
+            width: 300px;
+            text-align: center;
+        }
+
+        /* Utility */
+        .hidden {
+            display: none !important;
+        }
+
+        /* ==================== TOAST ==================== */
+        .toast-container {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            pointer-events: none;
+        }
+
+        @media (min-width: 640px) {
+            .toast-container {
+                bottom: 1.5rem;
+                right: 1.5rem;
+            }
+        }
+
+        .toast {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            min-width: 280px;
+            max-width: 400px;
+            padding: 1rem 1.25rem;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-hover);
+            pointer-events: auto;
+            animation: toast-slide-in 0.3s ease-out;
+        }
+
+        .toast.toast-hiding {
+            animation: toast-slide-out 0.2s ease-in forwards;
+        }
+
+        .toast-success {
+            border-left: 4px solid hsl(142, 70%, 45%);
+        }
+
+        .toast-error {
+            border-left: 4px solid var(--accent);
+        }
+
+        .toast-info {
+            border-left: 4px solid hsl(210, 70%, 50%);
+        }
+
+        .toast-warning {
+            border-left: 4px solid hsl(45, 90%, 50%);
+        }
+
+        .toast-icon {
+            flex-shrink: 0;
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+
+        .toast-success .toast-icon {
+            color: hsl(142, 70%, 45%);
+        }
+
+        .toast-error .toast-icon {
+            color: var(--accent);
+        }
+
+        .toast-info .toast-icon {
+            color: hsl(210, 70%, 50%);
+        }
+
+        .toast-warning .toast-icon {
+            color: hsl(45, 90%, 50%);
+        }
+
+        .toast-content {
+            flex: 1;
+        }
+
+        .toast-title {
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--foreground);
+            margin-bottom: 0.125rem;
+        }
+
+        .toast-message {
+            font-size: 0.8125rem;
+            color: var(--muted-foreground);
+        }
+
+        .toast-close {
+            flex-shrink: 0;
+            background: none;
+            border: none;
+            padding: 0.25rem;
+            cursor: pointer;
+            color: var(--muted-foreground);
+            opacity: 0.6;
+            transition: opacity 0.2s;
+        }
+
+        .toast-close:hover {
+            opacity: 1;
+        }
+
+        @keyframes toast-slide-in {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes toast-slide-out {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        /* PDF */
+
+        .pdf-container {
+            display: none;
+            margin-top: 15px;
+        }
+
+        .pdf-viewer {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--card);
+            overflow: hidden;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .pdf-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 12px;
+            background: var(--muted);
+            border-bottom: 1px solid var(--border);
+            gap: 12px;
+        }
+
+        .pdf-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border: none;
+            border-radius: 4px;
+            background: transparent;
+            color: var(--foreground);
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .pdf-btn:hover {
+            background: var(--accent);
+        }
+
+        .pdf-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        #pdf-page-info {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--foreground);
+            white-space: nowrap;
+        }
+
+        .pdf-zoom {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #pdf-zoom-level {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--foreground);
+            min-width: 45px;
+            text-align: center;
+        }
+
+        .pdf-canvas-container {
+            position: relative;
+            background: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 250px;
+            overflow: auto;
+        }
+
+        #pdf-canvas {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background: white;
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 768px) {
+            .pdf-toolbar {
+                padding: 6px 8px;
+                gap: 8px;
+            }
+
+            .pdf-btn {
+                width: 28px;
+                height: 28px;
+            }
+
+            #pdf-page-info {
+                font-size: 13px;
+            }
+
+            #pdf-zoom-level {
+                font-size: 13px;
+                min-width: 40px;
+            }
+
+            .pdf-canvas-container {
+                min-height: 200px;
+            }
+        }
+
+        .view-btn {
+            padding: 10px 18px;
+            margin: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            border-radius: 6px;
+            background-color: var(--primary);
+            color: #fff;
+        }
+
+        .view-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* TABLE */
+        .table-container {
+            max-width: 1000px;
+            margin: auto;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        thead {
+            background: #7a5c3e;
+            color: #fff;
+        }
+
+        th,
+        td {
+            padding: 14px 16px;
+            text-align: left;
+        }
+
+        th {
+            font-weight: 600;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            font-size: 14px;
+            border-bottom: 1px solid #eee;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Rating */
+        .rating-box #mystery-title {
+            padding-top: 10px;
+            font-size: 1.5em;
+            color: var(--accent);
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+
+        .rating-box #mystery-title:hover {
+            transform: scale(1.05);
+        }
+
+        .rating-box .subtitle {
+            font-size: 0.9em;
+            color: #9ca3af;
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+
+        .rating-box #hearts-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            min-height: 40px;
+            margin-top: 1rem;
+        }
+
+        .rating-box #heart-count {
+            font-size: 1em;
+            color: #be123c;
+            margin-top: 0.5rem;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .rating-box #clear-btn {
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background: var(--secondary);
+            color: var(--secondary-foreground);
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: background 0.2s;
+        }
+
+        .rating-box #clear-btn:hover {
+            background: var(--rose-dark);
+        }
+
+        #clear-btn {
+            font-size: 1.1em;
+            padding: 0.75rem 2rem;
+            margin-top: 2rem;
+            border: none;
+            border-radius: 0.5rem;
+            background: #e11d48;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 10px 25px -5px rgba(225, 29, 72, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        #clear-btn:hover {
+            background: #be123c;
+            box-shadow: 0 15px 30px -5px rgba(225, 29, 72, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .heart-icon {
+            width: 40px;
+            height: 40px;
+            animation: heartPop 0.4s ease-out forwards;
+        }
+
+        @keyframes heartPop {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.3);
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+
+            table,
+            thead,
+            tbody,
+            th,
+            td,
+            tr {
+                display: block;
+            }
+
+            thead {
+                display: none;
+            }
+
+            tr {
+                margin-bottom: 15px;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                padding: 10px;
+                background: #fff;
+            }
+
+            td {
+                border: none;
+                padding: 8px 10px;
+                position: relative;
+                padding-left: 45%;
+            }
+
+            td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 10px;
+                top: 8px;
+                font-weight: 600;
+                color: #7a5c3e;
+                width: 40%;
+                white-space: nowrap;
+            }
+
+            .rating-box {
+                position: static;
+                width: 80%;
+                margin-left: 40px;
+                margin-bottom: 20px;
+            }
+        }
+
+        /* ========== Section Divider ========== */
+        .section-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 2rem 0;
+        }
+
+        .section-divider .line {
+            height: 1px;
+            width: 128px;
+            max-width: 30%;
+            background: linear-gradient(90deg, transparent, rgba(191, 146, 100, 0.5));
+        }
+
+        .section-divider .line:last-child {
+            background: linear-gradient(90deg, rgba(191, 146, 100, 0.5), transparent);
+        }
+
+        .section-divider svg {
+            width: 24px;
+            height: 24px;
+            color: var(--secondary);
+        }
+    </style>
+
+    <!-- PDF.js for inline PDF viewing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    </script>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-inner">
+                <a href="#" class="nav-logo">
+                    <span>Page & Paper</span>
+                </a>
+
+                <div class="nav-links">
+                    <a href="/" class="nav-link">Home Page</a>
+                    <a href="/about-us" class="nav-link">About Us</a>
+                    <a href="/owner-founder" class="nav-link">Owner/Founder</a>
+                    <a href="/dashboard" class="nav-link">Reader Dashboard</a>
+                </div>
+
+                <button class="nav-menu-btn" onclick="toggleMenu()" aria-label="Toggle menu">
+                    <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                    <svg id="close-icon" style="display:none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="nav-mobile" id="mobile-menu">
+                <a href="/" class="nav-mobile-link">Home Page</a>
+                <a href="/about-us" class="nav-mobile-link">About Us</a>
+                <a href="/owner-founder" class="nav-mobile-link">Owner/Founder</a>
+                <a href="/dashboard" class="nav-mobile-link">Reader Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <img src="/static/banners/Mystery_Thriller Book.png" alt="Page & Paper Bookstore" class="hero-img">
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="hero-stat-value">150+</div>
+                <div class="hero-stat-label">Mystery Titles</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-value">10K+</div>
+                <div class="hero-stat-label">Happy Readers</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-value">4.25★</div>
+                <div class="hero-stat-label">Average Rating</div>
+            </div>
+        </div>
+        </div>
+    </header>
+
+    <!-- Section Divider -->
+    <div class="section-divider">
+        <div class="line"></div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+                d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z">
+            </path>
+        </svg>
+        <div class="line"></div>
+    </div>
+
+    <!-- Book Grid - ALL BOOKS RENDERED IN HTML -->
+    <main class="book-grid-section">
+        <div class="container">
+            <div class="book-grid" id="book-grid">
+                <!-- Books will be loaded here dynamically -->
+            </div>
+        </div>
+        <!-- Detail Modal -->
+        <div id="overlay" class="overlay" onclick="closeModals()"></div>
+        </div>
+        </div>
+    </main>
+
+    <!-- Detail Modal -->
+    <div id="overlay" class="overlay" onclick="closeModals()"></div>
+
+    <div id="detail-modal" class="modal">
+        <button class="modal-close" onclick="closeModals()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <h3 id="modal-title" class="modal-title">Book Title</h3>
+        <p id="modal-desc" class="modal-desc">Book description goes here...</p>
+        <hr class="modal-divider">
+        <div class="modal-detail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                style="color: var(--golden-accent);">
+                <polygon
+                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                </polygon>
+            </svg>
+            <div>
+                <span class="modal-detail-label">Rating:</span>
+                <span id="modal-rating" class="modal-detail-value"></span>
+            </div>
+        </div>
+        <div class="modal-detail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                style="color: var(--secondary);">
+                <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                <line x1="7" y1="7" x2="7.01" y2="7"></line>
+            </svg>
+            <div>
+                <span class="modal-detail-label">Tags:</span>
+                <div id="modal-tags" class="modal-tags"></div>
+            </div>
+        </div>
+        <div class="modal-detail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--accent);">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <div>
+                <span class="modal-detail-label">Published:</span>
+                <span id="modal-published" class="modal-detail-value"></span>
+            </div>
+        </div>
+        <button class="btn btn-primary modal-btn" onclick="closeModals()">Close</button>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="modal" style="max-width: 32rem;">
+        <div class="checkout-header">
+            <h2>Checkout</h2>
+            <button class="modal-close" style="position: static;" onclick="closeModals()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <div class="order-summary">
+            <h3>Order Summary</h3>
+            <div class="order-item">
+                <img id="checkout-img" src="" alt="Book">
+                <div class="order-item-details">
+                    <h4 id="checkout-title" class="order-item-title">Book Title</h4>
+                    <p id="checkout-author" class="order-item-author">Author Name</p>
+                    <p id="checkout-qty" class="order-item-qty">Qty: 1</p>
+                    <p id="checkout-subtotal" class="order-item-price">₱650</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="payment-section">
+            <h3>Mode of Payment</h3>
+            <div class="payment-options">
+                <div class="payment-option selected" onclick="selectPayment(this)">
+                    <div class="payment-radio"></div>
+                    <div class="payment-icon">📱</div>
+                    <div class="payment-info">
+                        <div class="payment-name">GCash</div>
+                        <div class="payment-desc">Pay via GCash e-wallet</div>
+                    </div>
+                </div>
+                <div class="payment-option" onclick="selectPayment(this)">
+                    <div class="payment-radio"></div>
+                    <div class="payment-icon">💵</div>
+                    <div class="payment-info">
+                        <div class="payment-name">Cash on Delivery</div>
+                        <div class="payment-desc">Pay when your order arrives</div>
+                    </div>
+                </div>
+                <div class="payment-option" onclick="selectPayment(this)">
+                    <div class="payment-radio"></div>
+                    <div class="payment-icon">💳</div>
+                    <div class="payment-info">
+                        <div class="payment-name">Credit/Debit Card</div>
+                        <div class="payment-desc">Visa, Mastercard, JCB</div>
+                    </div>
+                </div>
+                <div class="payment-option" onclick="selectPayment(this)">
+                    <div class="payment-radio"></div>
+                    <div class="payment-icon">🏦</div>
+                    <div class="payment-info">
+                        <div class="payment-name">Bank Transfer</div>
+                        <div class="payment-desc">Direct bank deposit</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="price-breakdown">
+            <div class="price-row">
+                <span>Subtotal</span>
+                <span id="breakdown-subtotal">₱650</span>
+            </div>
+            <div class="price-row">
+                <span>Shipping Fee</span>
+                <span>₱50</span>
+            </div>
+            <div class="price-row total">
+                <span>Total</span>
+                <span id="breakdown-total">₱700</span>
+            </div>
+        </div>
+
+        <button class="btn btn-primary" style="width: 100%;" onclick="placeOrder()">Place Order</button>
+        <p class="terms-text">By placing this order, you agree to our Terms of Service</p>
+    </div>
+
+    <!-- PDF -->
+    <button id="view-pdf-btn" class="view-btn" onclick="togglePDF()">
+        View Mystery Book Overview PDF
+    </button>
+
+    <br>
+
+    <div class="pdf-container" id="pdfBox" style="display:none; margin-top:0.75rem;">
+        <div class="pdf-viewer">
+            <!-- PDF Toolbar -->
+            <div class="pdf-toolbar">
+                <button id="pdf-prev" class="pdf-btn" title="Previous Page">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15,18 9,12 15,6" />
+                    </svg>
+                </button>
+                <span id="pdf-page-info">Page 1 of 1</span>
+                <button id="pdf-next" class="pdf-btn" title="Next Page">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9,18 15,12 9,6" />
+                    </svg>
+                </button>
+                <div class="pdf-zoom">
+                    <button id="pdf-zoom-out" class="pdf-btn" title="Zoom Out">-</button>
+                    <span id="pdf-zoom-level">100%</span>
+                    <button id="pdf-zoom-in" class="pdf-btn" title="Zoom In">+</button>
+                </div>
+                <button id="pdf-download" class="pdf-btn" title="Download PDF">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7,10 12,15 17,10" />
+                        <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+                </button>
+            </div>
+            <!-- PDF Canvas -->
+            <div class="pdf-canvas-container">
+                <canvas id="pdf-canvas"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- TABLE -->
+    <button id="view-table-btn" class="view-btn" onclick="toggleTable()">
+        View Mystery Book Details Table
+    </button>
+
+    <div class="table-container" id="details-table" style="display:none; margin-top:0.75rem;">
+        <table>
+            <thead>
+                <tr>
+                    <th>Book Name</th>
+                    <th>Price</th>
+                    <th>Author</th>
+                    <th>Tags</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-label="Book Name">The Silent Patient</td>
+                    <td data-label="Price">₱720</td>
+                    <td data-label="Author">Alex Michaelides</td>
+                    <td data-label="Tags">Psychological Thriller, Mystery, Twist</td>
+                </tr>
+                <tr>
+                    <td data-label="Book Name">Gone Girl</td>
+                    <td data-label="Price">₱700</td>
+                    <td data-label="Author">Gillian Flynn</td>
+                    <td data-label="Tags">Psychological Thriller, Crime, Suspense</td>
+                </tr>
+                <tr>
+                    <td data-label="Book Name">The Girl with the Dragon Tattoo</td>
+                    <td data-label="Price">₱750</td>
+                    <td data-label="Author">Stieg Larsson</td>
+                    <td data-label="Tags">Crime, Mystery, Nordic Noir</td>
+                </tr>
+                <tr>
+                    <td data-label="Book Name">Big Little Lies</td>
+                    <td data-label="Price">₱680</td>
+                    <td data-label="Author">Liane Moriarty</td>
+                    <td data-label="Tags">Mystery, Drama, Psychological</td>
+                </tr>
+                <tr>
+                    <td data-label="Book Name">The Da Vinci Code</td>
+                    <td data-label="Price">₱700</td>
+                    <td data-label="Author">Dan Brown</td>
+                    <td data-label="Tags">Mystery, Thriller, Conspiracy</td>
+                </tr>
+                <tr>
+                    <td data-label="Book Name">The Woman in the Window</td>
+                    <td data-label="Price">₱690</td>
+                    <td data-label="Author">A.J. Finn</td>
+                    <td data-label="Tags">Psychological Thriller, Suspense</td>
+                </tr>
+                <tr>
+                    <td data-label="Book Name">And Then There Were None</td>
+                    <td data-label="Price">₱650</td>
+                    <td data-label="Author">Agatha Christie</td>
+                    <td data-label="Tags">Classic Mystery, Crime, Suspense</td>
+                </tr>
+                <tr>
+                    <td data-label="Book Name">The Reversal</td>
+                    <td data-label="Price">₱670</td>
+                    <td data-label="Author">Michael Connelly</td>
+                    <td data-label="Tags">Legal Thriller, Crime, Mystery</td>
+                </tr>
+                <tr>
+                    <td data-label="Book Name">Shutter Island</td>
+                    <td data-label="Price">₱720</td>
+                    <td data-label="Author">Dennis Lehane</td>
+                    <td data-label="Tags">Psychological Thriller, Mystery</td>
+                </tr>
+                <tr>
+                    <td data-label="Book Name">The Girl on the Train</td>
+                    <td data-label="Price">₱680</td>
+                    <td data-label="Author">Paula Hawkins</td>
+                    <td data-label="Tags">Psychological Thriller, Mystery</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <br>
+
+    <!-- FOOTER -->
+    <footer id="newsletter" class="footer">
+        <div class="footer-content container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                        </svg>
+                        <span>Page & Paper</span>
+                    </div>
+                    <p class="footer-text">Join our community of book lovers and receive curated recommendations,
+                        exclusive
+                        content, and the latest literary updates.</p>
+
+                    <div class="social-links">
+                        <a href="https://facebook.com" target="_blank" class="social-link" aria-label="Facebook">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                            </svg>
+                        </a>
+                        <a href="https://instagram.com" target="_blank" class="social-link" aria-label="Instagram">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                        </a>
+                        <a href="https://twitter.com" target="_blank" class="social-link" aria-label="Twitter">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+                                </path>
+                            </svg>
+                        </a>
+                        <a href="mailto:pageandpaper@email.com" class="social-link" aria-label="Email">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                </path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RATING BOX -->
+        <div class="rating-box">
+            <div id="mystery-title" onclick="addHeart()">
+                Mystery/Thriller Rating
+            </div>
+            <p class="subtitle">Click to add your rating</p>
+
+            <div id="hearts-container"></div>
+            <p id="heart-count"></p>
+
+            <button id="clear-btn" onclick="clearHearts()">Clear Rating</button>
+        </div>
+
+        <template id="heart-template">
+            <img class="heart-icon" src="/static/book_icon.jpg" alt="Book Icon">
+        </template>
+
+        <div class="footer-bottom">
+            <div class="container footer-bottom-inner">
+                <p>© 2024 Page & Paper. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+
+
+    </footer>
+    </div>
+
+    <script>
+
+        // Reviews toggle and loader
+        (function () {
+            let reviewsLoaded = false;
+            async function loadReviews() {
+                try {
+                    const res = await fetch('/reviews');
+                    if (!res.ok) throw new Error('Failed to load reviews');
+                    const reviews = await res.json();
+                    const tbody = document.querySelector('#reviews-table tbody');
+                    if (!Array.isArray(reviews) || reviews.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="3">No reviews found</td></tr>';
+                        return;
+                    }
+                    tbody.innerHTML = reviews.map(r => `
+            <tr>
+              <td>${r.id}</td>
+              <td>${(r.question || '').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</td>
+              <td>${new Date(r.timestamp).toLocaleString()}</td>
+            </tr>
+          `).join('');
+                    reviewsLoaded = true;
+                } catch (err) {
+                    console.error(err);
+                    const tbody = document.querySelector('#reviews-table tbody');
+                    if (tbody) tbody.innerHTML = '<tr><td colspan="3">Error loading reviews</td></tr>';
+                }
+            }
+        })();
+
+        // PDF.js variables
+        let pdfDoc = null;
+        let pageNum = 1;
+        let pageRendering = false;
+        let pageNumPending = null;
+        let scale = 1.0;
+        const maxScale = 3.0;
+        const minScale = 0.5;
+        const scaleStep = 0.25;
+
+        // Render PDF page
+        function renderPage(num) {
+            pageRendering = true;
+            pdfDoc.getPage(num).then(function (page) {
+                const canvas = document.getElementById('pdf-canvas');
+                const ctx = canvas.getContext('2d');
+                const viewport = page.getViewport({ scale: scale });
+
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                const renderContext = {
+                    canvasContext: ctx,
+                    viewport: viewport
+                };
+
+                const renderTask = page.render(renderContext);
+
+                renderTask.promise.then(function () {
+                    pageRendering = false;
+                    if (pageNumPending !== null) {
+                        renderPage(pageNumPending);
+                        pageNumPending = null;
+                    }
+                });
+            });
+
+            updateUI();
+        }
+
+        // Update UI elements
+        function updateUI() {
+            document.getElementById('pdf-page-info').textContent = `Page ${pageNum} of ${pdfDoc.numPages}`;
+            document.getElementById('pdf-zoom-level').textContent = `${Math.round(scale * 100)}%`;
+
+            // Update button states
+            document.getElementById('pdf-prev').disabled = pageNum <= 1;
+            document.getElementById('pdf-next').disabled = pageNum >= pdfDoc.numPages;
+            document.getElementById('pdf-zoom-out').disabled = scale <= minScale;
+            document.getElementById('pdf-zoom-in').disabled = scale >= maxScale;
+        }
+
+        // Queue render page
+        function queueRenderPage(num) {
+            if (pageRendering) {
+                pageNumPending = num;
+            } else {
+                renderPage(num);
+            }
+        }
+
+        // Navigation functions
+        function onPrevPage() {
+            if (pageNum <= 1) return;
+            pageNum--;
+            queueRenderPage(pageNum);
+        }
+
+        function onNextPage() {
+            if (pageNum >= pdfDoc.numPages) return;
+            pageNum++;
+            queueRenderPage(pageNum);
+        }
+
+        function onZoomIn() {
+            if (scale >= maxScale) return;
+            scale = Math.min(maxScale, scale + scaleStep);
+            queueRenderPage(pageNum);
+        }
+
+        function onZoomOut() {
+            if (scale <= minScale) return;
+            scale = Math.max(minScale, scale - scaleStep);
+            queueRenderPage(pageNum);
+        }
+
+        function onDownload() {
+            const link = document.createElement('a');
+            link.href = '/pdfs/mystery';
+            link.download = 'Mystery Book Overview.pdf';
+            link.click();
+        }
+
+        // Load PDF
+        function loadPDF(url) {
+            const canvas = document.getElementById('pdf-canvas');
+            const ctx = canvas.getContext('2d');
+
+            // Show loading
+            canvas.width = 400;
+            canvas.height = 300;
+            ctx.fillStyle = 'var(--muted)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'var(--foreground)';
+            ctx.font = '16px Lora';
+            ctx.textAlign = 'center';
+            ctx.fillText('Loading PDF...', canvas.width / 2, canvas.height / 2);
+
+            pdfjsLib.getDocument(url).promise.then(function (pdf) {
+                pdfDoc = pdf;
+                renderPage(pageNum);
+            }).catch(function (error) {
+                console.error('Error loading PDF:', error);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillText('Error loading PDF. Please try again.', canvas.width / 2, canvas.height / 2);
+            });
+        }
+
+        // Toggle PDF viewer
+        function togglePDF() {
+            const box = document.getElementById('pdfBox');
+            const btn = document.getElementById('view-pdf-btn');
+            if (!box || !btn) return;
+            if (box.style.display === 'none' || box.style.display === '') {
+                box.style.display = 'block';
+                btn.textContent = 'Hide PDF Overview';
+
+                // Load PDF if not already loaded
+                if (!pdfDoc) {
+                    loadPDF('/pdfs/mystery');
+                }
+
+                setTimeout(() => box.scrollIntoView({ behavior: 'smooth' }), 120);
+            } else {
+                box.style.display = 'none';
+                btn.textContent = 'View Mystery Book Overview PDF';
+            }
+        }
+
+        // Toggle details table
+        function toggleTable() {
+            const box = document.getElementById('details-table');
+            const btn = document.getElementById('view-table-btn');
+            if (!box || !btn) return;
+            if (box.style.display === 'none' || box.style.display === '') {
+                box.style.display = 'block';
+                btn.textContent = 'Hide Details Table';
+                setTimeout(() => box.scrollIntoView({ behavior: 'smooth' }), 120);
+            } else {
+                box.style.display = 'none';
+                btn.textContent = 'View Mystery Book Details Table';
+            }
+        }
+
+        // ==================== TOAST SYSTEM ====================
+        function showToast(type, title, message, duration = 4000) {
+            const container = document.getElementById('toast-container');
+
+            const icons = {
+                success: '<svg class="toast-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>',
+                error: '<svg class="toast-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" stroke-width="2" d="M15 9l-6 6M9 9l6 6"/></svg>',
+                info: '<svg class="toast-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" stroke-width="2" d="M12 16v-4M12 8h.01"/></svg>',
+                warning: '<svg class="toast-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>'
+            };
+
+            const toast = document.createElement('div');
+            toast.className = 'toast toast-' + type;
+            toast.innerHTML = `
+                ${icons[type] || icons.info}
+                <div class="toast-content">
+                    <div class="toast-title">${title}</div>
+                    ${message ? '<div class="toast-message">' + message + '</div>' : ''}
+                </div>
+                <button class="toast-close" onclick="closeToast(this.parentElement)">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            `;
+
+            container.appendChild(toast);
+
+            if (duration > 0) {
+                setTimeout(() => closeToast(toast), duration);
+            }
+
+            return toast;
+        }
+
+        function closeToast(toast) {
+            if (!toast || toast.classList.contains('toast-hiding')) return;
+            toast.classList.add('toast-hiding');
+            setTimeout(() => toast.remove(), 200);
+        }
+
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+
+            menu.classList.toggle('active');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        }
+
+
+        // Render Books
+        function renderBooks(books) {
+            const bookGrid = document.getElementById('book-grid');
+            bookGrid.innerHTML = '';
+
+            books.forEach(book => {
+                const bookCard = document.createElement('article');
+                bookCard.className = 'book-card';
+
+                const stockText = book.stock > 10 ? `Qty (${book.stock} Available)` : `Qty (${book.stock} Available) - Limited Stock`;
+                const badge = book.stock <= 10 ? '<span class="book-badge">Limited Stock</span>' : '';
+
+                bookCard.innerHTML = `
+          <div class="book-cover">
+            <div class="book-cover-inner">
+              <img src="/static/books/${book.image}" alt="${book.title}" loading="lazy">
+              ${badge}
+            </div>
+          </div>
+          <div class="book-info">
+            <h3 class="book-title">${book.title}</h3>
+            <p class="book-author">${book.author}</p>
+          </div>
+          <hr class="book-divider">
+          <div class="book-qty-label">${stockText}</div>
+          <div class="book-qty-selector">
+            <button class="book-qty-btn" disabled>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </button>
+            <span class="book-qty-value">1</span>
+            <button class="book-qty-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </button>
+          </div>
+          <div class="book-total">₱${book.price}</div>
+          <div class="book-actions">
+            <button class="btn btn-buy" onclick="openCheckout('${book.title.replace(/'/g, "\\'")}', '${book.author.replace(/'/g, "\\'")}', ${book.price}, '/static/books/${book.image}', this)">Buy Now</button>
+            <button class="btn btn-view" data-book='${JSON.stringify(book).replace(/'/g, "&apos;").replace(/"/g, "&quot;")}'>View</button>
+          </div>
+        `;
+
+                bookGrid.appendChild(bookCard);
+            });
+
+            // Attach View button event listeners
+            document.querySelectorAll('.btn-view').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const bookData = this.getAttribute('data-book').replace(/&apos;/g, "'").replace(/&quot;/g, '"');
+                    const book = JSON.parse(bookData);
+                    openDetail(
+                        book.title,
+                        book.description || 'A wonderful romance novel by ' + book.author + '.',
+                        '★★★★☆ (4.3/5)',
+                        book.tags,
+                        '2021'
+                    );
+                });
+            });
+
+            // Attach quantity button event listeners
+            document.querySelectorAll('.book-qty-btn').forEach(btn => {
+                if (!btn.querySelector('svg line[x1="12"]')) { // Minus button (no vertical line)
+                    btn.onclick = () => changeQty(btn, -1);
+                } else { // Plus button (has vertical line)
+                    btn.onclick = () => changeQty(btn, 1);
+                }
+            });
+        }
+
+
+        // Quantity Change Function
+        function changeQty(button, delta) {
+            const card = button.closest('.book-card');
+            const qtyValue = card.querySelector('.book-qty-value');
+            const minusBtn = card.querySelector('.book-qty-btn:first-child');
+            const plusBtn = card.querySelector('.book-qty-btn:last-child');
+            const totalElement = card.querySelector('.book-total');
+            const price = parseInt(card.querySelector('.book-total').textContent.replace('₱', '')) / parseInt(qtyValue.textContent); // Assuming base price is per unit
+
+            // Get available stock from the label
+            const stockLabel = card.querySelector('.book-qty-label').textContent;
+            const stockMatch = stockLabel.match(/Qty \((\d+) Available\)/);
+            const maxStock = stockMatch ? parseInt(stockMatch[1]) : 1;
+
+            let qty = parseInt(qtyValue.textContent) + delta;
+            if (qty < 1) qty = 1; // Minimum quantity
+            if (qty > maxStock) qty = maxStock; // Maximum quantity based on stock
+
+            qtyValue.textContent = qty;
+            totalElement.textContent = '₱' + (price * qty);
+
+            // Enable/disable buttons
+            minusBtn.disabled = qty <= 1;
+            plusBtn.disabled = qty >= maxStock;
+        }
+
+        // Load Books on Page Load
+        function loadBooks() {
+            fetch('/api/books?genre=mystery')
+                .then(res => res.json())
+                .then(data => renderBooks(data))
+                .catch(error => console.error('Error loading books:', error));
+        }
+
+        // Attach event listeners to all quantity buttons (run after DOM load)
+        document.addEventListener('DOMContentLoaded', function () {
+            loadBooks(); // Load books initially
+
+            // Prevent modal clicks from closing
+            document.getElementById('detail-modal').addEventListener('click', function (e) {
+                e.stopPropagation();
+            });
+            document.getElementById('checkout-modal').addEventListener('click', function (e) {
+                e.stopPropagation();
+            });
+        });
+
+
+        // Modal Functions
+        function openDetail(title, description, rating, tags, published) {
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-desc').textContent = description;
+            document.getElementById('modal-rating').textContent = rating;
+            document.getElementById('modal-published').textContent = published;
+
+            const tagsContainer = document.getElementById('modal-tags');
+            tagsContainer.innerHTML = tags.map(tag => `<span class="modal-tag">${tag}</span>`).join('');
+
+            document.getElementById('overlay').classList.add('active');
+            document.getElementById('detail-modal').classList.add('active');
+        }
+
+        function openCheckout(title, author, price, image, button) {
+            const card = button.closest('.book-card');
+            const qty = parseInt(card.querySelector('.book-qty-value').textContent);
+            const total = parseInt(card.querySelector('.book-total').textContent.replace('₱', ''));
+
+            document.getElementById('checkout-img').src = image;
+            document.getElementById('checkout-title').textContent = title;
+            document.getElementById('checkout-author').textContent = author;
+            document.getElementById('checkout-qty').textContent = 'Qty: ' + qty;
+            document.getElementById('checkout-subtotal').textContent = '₱' + total;
+            document.getElementById('breakdown-subtotal').textContent = '₱' + total;
+            document.getElementById('breakdown-total').textContent = '₱' + (total + 50);
+
+            document.getElementById('overlay').classList.add('active');
+            document.getElementById('checkout-modal').classList.add('active');
+        }
+
+        function closeModals() {
+            document.getElementById('overlay').classList.remove('active');
+            document.getElementById('detail-modal').classList.remove('active');
+            document.getElementById('checkout-modal').classList.remove('active');
+        }
+
+        // Payment Selection
+        function selectPayment(option) {
+            document.querySelectorAll('.payment-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            option.classList.add('selected');
+        }
+
+        // Place Order
+        function placeOrder() {
+            const qtyText = document.getElementById('checkout-qty').innerText;
+            const qty = parseInt(qtyText.replace('Qty: ', ''));
+
+            const orderData = {
+                title: document.getElementById('checkout-title').innerText,
+                author: document.getElementById('checkout-author').innerText,
+                price: parseInt(document.getElementById('checkout-subtotal').innerText.replace('₱', '')) / qty,
+                quantity: qty,
+                payment: document.querySelector('.payment-option.selected .payment-name').innerText,
+                image: document.getElementById('checkout-img').src,
+                genre: 'mystery'
+            };
+
+            fetch('/api/order', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(orderData)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.error) {
+                        showToast('error', 'Order Failed', data.error);
+                        return;
+                    }
+                    showToast('success', 'Order Placed!', `Order ID: ${data.order_id}`);
+                    closeModals();
+                })
+                .catch(error => {
+                    showToast('error', 'Order Failed', 'Network error. Please try again.');
+                    console.error('Order error:', error);
+                });
+        }
+
+        let heartCount = 0;
+
+        function renderHearts() {
+            const container = document.getElementById('hearts-container');
+            while (container.firstChild) {
+                container.removeChild(container.firstChild);
+            }
+            for (let i = 0; i < Math.min(heartCount, 5); i++) {
+                const template = document.getElementById('heart-template');
+                const clone = template.content.cloneNode(true);
+                container.appendChild(clone);
+            }
+        }
+
+        function addHeart() {
+            if (heartCount < 5) {
+                heartCount++;
+                renderHearts();
+                updateCount();
+                saveToServer();
+            }
+        }
+
+        function clearHearts() {
+            heartCount = 0;
+            renderHearts();
+            updateCount();
+            saveToServer();
+        }
+
+        function updateCount() {
+            const countEl = document.getElementById('heart-count');
+            if (heartCount > 0) {
+                countEl.textContent = heartCount + (heartCount === 1 ? ' heart' : ' hearts') + ' of love!';
+            } else {
+                countEl.textContent = '';
+            }
+        }
+
+        function saveToServer() {
+            fetch('/api/preferences', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ mystery_rating: heartCount })
+            })
+                .catch(error => console.error('Save rating error:', error));
+        }
+
+        // Load rating on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('/api/user')
+                .then(res => res.json())
+                .then(data => {
+                    if (!data.error) {
+                        heartCount = Math.min(data.preferences.mystery_rating || 0, 5);
+                        renderHearts();
+                        updateCount();
+                    }
+                })
+                .catch(error => console.error('Load user error:', error));
+
+            // PDF viewer event listeners
+            document.getElementById('pdf-prev').addEventListener('click', onPrevPage);
+            document.getElementById('pdf-next').addEventListener('click', onNextPage);
+            document.getElementById('pdf-zoom-in').addEventListener('click', onZoomIn);
+            document.getElementById('pdf-zoom-out').addEventListener('click', onZoomOut);
+            document.getElementById('pdf-download').addEventListener('click', onDownload);
+        });
+    </script>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="/static/js/theme.js"></script>
+</body>
+
+</html>
